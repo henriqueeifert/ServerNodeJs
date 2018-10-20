@@ -36,7 +36,7 @@ function normalizePort(val) {
       ? 'Pipe ' + port
       : 'Port ' + port;
   
-    switch (error.code) {
+    switch (error.code) { 
       case 'EACCES':
         console.error(bind + ' requires elevated privileges');
         process.exit(1);
