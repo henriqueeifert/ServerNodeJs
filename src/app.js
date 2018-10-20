@@ -7,7 +7,7 @@ const config     = require('./config');
 const app = express();
 const router = express.Router();
 
-//conecta MongoDB
+//conecta MongoDB 
 mongoose.connect(config.connectionString);
 //carrega models
 const Customer  = require('./models/user');
