@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     res.status(200).send({
-        title: "Node Teste", version: "0.0.3"
+        title: "Node Server Funcionado", version: "1.0.0"
     });
 });
 
