@@ -38,3 +38,9 @@ exports.getByEmail = async(email) => {
         }, 'id');
     return res;
 }
+exports.get = async() => {
+    const res = await Product.find({
+        active: true
+    }, 'title price slug');
+    return res;
+}
