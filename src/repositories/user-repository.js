@@ -39,7 +39,7 @@ exports.getByEmail = async(email) => {
     return res;
 }
 exports.get = async() => {
-    const res = await Product.find({
+    const res = await User.find({
         active: true
     }, 'nome email senha administrador');
     return res;
