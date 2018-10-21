@@ -41,6 +41,6 @@ exports.getByEmail = async(email) => {
 exports.get = async() => {
     const res = await Product.find({
         active: true
-    }, 'title price slug');
+    }, 'nome email senha administrador');
     return res;
 }
