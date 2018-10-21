@@ -40,7 +40,7 @@ exports.getByEmail = async(email) => {
 }
 exports.get = async() => {
     const res = await User.find({
-        active: true
-    }, 'nome email senha administrador');
+        //active: true
+    }, '_id nome email senha administrador');
     return res;
 }
