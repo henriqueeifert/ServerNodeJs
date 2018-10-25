@@ -29,6 +29,6 @@ app.use(function(req,res,next){
 })
 
 app.use('/', indexRoute);
-app.use('/api/autenticacao', userRoute);
+app.use('/api/usuarios', userRoute);
 
 module.exports = app; 
