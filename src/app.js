@@ -29,6 +29,6 @@ app.use(function(req,res,next){
 })
 
 app.use('/', indexRoute);
-app.use('/api/usuarios', userRoute);
+app.use('/api/usuario', userRoute);
 
 module.exports = app; 
