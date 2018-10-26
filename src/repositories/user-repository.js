@@ -41,6 +41,6 @@ exports.getByEmail = async(email) => {
 exports.get = async() => {
     const res = await User.find({
         //active: true
-    } /*'_id nome email senha administrador'*/);
+    }, '_id nome email senha administrador');
     return res;
 }
