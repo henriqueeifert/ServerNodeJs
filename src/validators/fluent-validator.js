@@ -6,30 +6,30 @@ function ValidationContract() {
     errors = [];
 }
 
-ValidationContract.prototype.isRequired = (value, message) => {
+ValidationContract.prototype.isRequired = (campo, value, message) => {
     if (!value || value.length <= 0)
-        errors.push({ message: message });
+        errors.push({ campo: message });
 }
 
-ValidationContract.prototype.hasMinLen = (value, min, message) => {
+ValidationContract.prototype.hasMinLen = (campo, value, min, message) => {
     if (!value || value.length < min)
-        errors.push({ message: message });
+        errors.push({ campo: message });
 }
 
-ValidationContract.prototype.hasMaxLen = (value, max, message) => {
+ValidationContract.prototype.hasMaxLen = (campo, value, max, message) => {
     if (!value || value.length > max)
-        errors.push({ message: message });
+        errors.push({ campo: message });
 }
 
-ValidationContract.prototype.isFixedLen = (value, len, message) => {
+ValidationContract.prototype.isFixedLen = (campo, value, len, message) => {
     if (value.length != len)
-        errors.push({ message: message });
+        errors.push({ campo: message });
 }
 
-ValidationContract.prototype.isEmail = (value, message) => {
+ValidationContract.prototype.isEmail = (campo, value, message) => {
     var reg = new RegExp(/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
     if (!reg.test(value))
-        errors.push({ message: message });
+        errors.push({ campo: message });
 }
 
 ValidationContract.prototype.errors = () => { 
