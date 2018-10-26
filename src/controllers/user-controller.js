@@ -27,6 +27,7 @@ exports.post = async(req, res, next) => {
             nome: req.body.nome,
             email: req.body.email,
             senha: md5(req.body.senha + global.SALT_KEY),
+            data_nascimento: "31/12/2018",
             administrador: true
         }
         );
@@ -175,7 +176,7 @@ exports.delete = async(req, res, next) => {
 exports.get = async(req, res, next) => {
     try {
         var data = await repository.get();
-        res.status(200).send('{ "usuarios": ['+data+']}');
+        res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
             mensagem: 'Falha ao processar sua requisição: '+e
