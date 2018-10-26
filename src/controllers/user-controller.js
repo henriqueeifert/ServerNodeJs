@@ -41,7 +41,14 @@ exports.post = async(req, res, next) => {
         }
 
         res.status(201).send({
-            mensagem: 'Usuário cadastrado com sucesso!'
+            mensagem: 'Usuário cadastrado com sucesso!',
+            usuario: 
+            {
+                nome: req.body.nome,
+                email: req.body.email,
+                senha: md5(req.body.senha + global.SALT_KEY),
+                administrador: true
+            }            
         });
     } catch (e) {
         //console.log(e);
