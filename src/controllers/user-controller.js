@@ -40,7 +40,7 @@ exports.post = async(req, res, next) => {
             console.log('Erro envio de e-mail: '+e);
         }
 
-        res.status(201).send({
+        res.status(200).send({
             mensagem: 'Usuário cadastrado com sucesso!',
             usuario: 
             {
