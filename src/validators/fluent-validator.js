@@ -13,12 +13,12 @@ ValidationContract.prototype.isRequired = (value, message) => {
 
 ValidationContract.prototype.hasMinLen = (value, min, message) => {
     if (!value || value.length < min)
-        errors.push({ message: message });
+        errors.push({ "max": message });
 }
 
 ValidationContract.prototype.hasMaxLen = (value, max, message) => {
     if (!value || value.length > max)
-        errors.push({ message: message });
+        errors.push({ "min": message });
 }
 
 ValidationContract.prototype.isFixedLen = (value, len, message) => {
@@ -29,7 +29,7 @@ ValidationContract.prototype.isFixedLen = (value, len, message) => {
 ValidationContract.prototype.isEmail = (value, message) => {
     var reg = new RegExp(/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
     if (!reg.test(value))
-        errors.push({ message: message });
+        errors.push({ "email": message });
 }
 
 ValidationContract.prototype.errors = () => { 
