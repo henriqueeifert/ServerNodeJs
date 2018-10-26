@@ -140,7 +140,17 @@ exports.put = async(req, res, next) => {
                 administrador: false});
 
         res.status(200).send({
-            mensagem: 'Usuário atualizado com sucesso!'
+            mensagem: 'Usuário atualizado com sucesso!',
+            usuario: 
+            {
+            nome: req.body.nome,
+            email: req.body.email,
+            senha: md5(req.body.senha + global.SALT_KEY),
+            administrador: false,
+            data_nascimento: "31/12/2018"
+        }
+
+
         });
     }catch (e){
         res.status(500).send({
