@@ -41,12 +41,12 @@ exports.post = async(req, res, next) => {
         }
 
         res.status(201).send({
-            message: 'Usuário cadastrado com sucesso!'
+            mensagem: 'Usuário cadastrado com sucesso!'
         });
     } catch (e) {
         //console.log(e);
         res.status(500).send({
-            message: 'Falha ao processar sua requisição', data: e
+            mensagem: 'Falha ao processar sua requisição', data: e
         });
     }
 };
@@ -60,7 +60,7 @@ exports.authenticate = async(req, res, next) => {
         
         if (!user){
             res.status(404).send({
-               message: 'Usuário ou senha inválidos'});            
+                mensagem: 'Usuário ou senha inválidos'});            
             return;
         }
 
@@ -80,7 +80,7 @@ exports.authenticate = async(req, res, next) => {
         });
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao processar sua requisição: '+e
+            mensagem: 'Falha ao processar sua requisição: '+e
         });
     }
 };
@@ -95,7 +95,7 @@ exports.refreshToken = async(req, res, next) => {
         
         if (!user){
             res.status(401).send({
-               message: 'Usuário não encontrado'});            
+               mensagem: 'Usuário não encontrado'});            
             return;
         }
 
@@ -115,7 +115,7 @@ exports.refreshToken = async(req, res, next) => {
         });
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao processar sua requisição: '+e
+            mensagem: 'Falha ao processar sua requisição: '+e
         });
     }
 };
@@ -132,11 +132,11 @@ exports.put = async(req, res, next) => {
                 administrador: false});
 
         res.status(200).send({
-            message: 'Usuário atualizado com sucesso!'
+            mensagem: 'Usuário atualizado com sucesso!'
         });
     }catch (e){
         res.status(500).send({
-            message: 'Falha ao processar sua requisição: '+e
+            mensagem: 'Falha ao processar sua requisição: '+e
         });
     }
 };
@@ -145,11 +145,11 @@ exports.delete = async(req, res, next) => {
     try {
         await repository.delete(req.body.email)
         res.status(200).send({
-            message: 'Usuário removido com sucesso!'
+            mensagem: 'Usuário removido com sucesso!'
         });
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao processar sua requisição'
+            mensagem: 'Falha ao processar sua requisição'
         });
     }
 };
@@ -160,7 +160,7 @@ exports.get = async(req, res, next) => {
         res.status(200).send('{ "usuarios": ['+data+']}');
     } catch (e) {
         res.status(500).send({
-            message: 'Falha ao processar sua requisição: '+e
+            mensagem: 'Falha ao processar sua requisição: '+e
         });
     }
 }
