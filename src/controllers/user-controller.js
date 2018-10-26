@@ -47,7 +47,8 @@ exports.post = async(req, res, next) => {
                 nome: req.body.nome,
                 email: req.body.email,
                 senha: md5(req.body.senha + global.SALT_KEY),
-                administrador: true
+                administrador: true,
+                data_nascimento: "31/12/2018"
             }            
         });
     } catch (e) {
