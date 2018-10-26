@@ -19,7 +19,7 @@ exports.post = async(req, res, next) => {
     //var data_henrique = dateFormat(req.body.data_nascimento, "yyyy-mm-dd h:MM:ss");
     // Se os dados forem inválidos
     if (!contract.isValid()) {
-        res.status(400).send(contract.errors()).end();
+        res.status(400).send('"mensagem":“Erro ao incluir o Usuário”'+contract.errors()).end();
         return;
     }
     try {   
