@@ -9,9 +9,9 @@ const emailService = require('../services/email-service');
 
 exports.post = async(req, res, next) => {
     let contract = new ValidationContract();
-    contract.hasMinLen('nome', req.body.nome, 3, 'O nome do usuário deve conter pelo menos 3 caracteres');
-    contract.isEmail('email', req.body.email, 'O e-mail do usuário informado está inválido');
-    contract.hasMinLen('senha', req.body.senha, 6, 'A Senha deve conter pelo menos 6 caracteres');
+    contract.hasMinLen(req.body.nome, 3, 'O nome do usuário deve conter pelo menos 3 caracteres');
+    contract.isEmail(req.body.email, 'O e-mail do usuário informado está inválido');
+    contract.hasMinLen(req.body.senha, 6, 'A Senha deve conter pelo menos 6 caracteres');
     //
     //console.log(''+req.body.data_nascimento);
     //
