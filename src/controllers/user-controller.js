@@ -176,7 +176,7 @@ exports.get = async(req, res, next) => {
         var data = await repository.get();
         res.status(200).send(
             {
-                usuario: [
+                usuario: 
                 {
                     id: data._id,
                     nome: data.nome,
@@ -184,7 +184,7 @@ exports.get = async(req, res, next) => {
                     administrador: data.administrador,
                     data_nascimento: "31/12/2018"
                 }
-            ]});
+            });
     } catch (e) {
         res.status(500).send({
             mensagem: 'Falha ao processar sua requisição: '+e
