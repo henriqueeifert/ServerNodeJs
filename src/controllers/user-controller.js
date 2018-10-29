@@ -173,18 +173,16 @@ exports.delete = async(req, res, next) => {
 
 exports.get = async(req, res, next) => {
     try {
-        var data = await repository.get();
+        var user = await repository.get();
         res.status(200).send(
             {
-                usuario: 
-                {
-                    id: data._id,
-                    nome: data.nome,
-                    email: data.email,
-                    administrador: data.administrador,
-                    data_nascimento: "31/12/2018"
-                }
-            });
+                usuario:
+                 [
+                     user
+
+                ]
+                        
+        });
     } catch (e) {
         res.status(500).send({
             mensagem: 'Falha ao processar sua requisição: '+e
