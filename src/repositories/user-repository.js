@@ -40,7 +40,8 @@ exports.getByEmail = async(email) => {
 }
 exports.get = async() => {
     const res = await User.find(
-        {//active: true
-        }, '_id nome email data_nascimento administrador');
+        {
+            //active: true
+        }, 'id nome email data_nascimento administrador');
     return res;
 }

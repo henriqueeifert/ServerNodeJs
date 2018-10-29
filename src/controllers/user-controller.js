@@ -24,6 +24,7 @@ exports.post = async(req, res, next) => {
     }
     try {   
         await repository.create({
+            id:   getNextSequence('user_id'),
             nome: req.body.nome,
             email: req.body.email,
             senha: md5(req.body.senha + global.SALT_KEY),
@@ -176,12 +177,8 @@ exports.get = async(req, res, next) => {
         var user = await repository.get();
         res.status(200).send(
             {
-                usuario:
-                 [
-                     user
-
-                ]
-                        
+                usuarios:
+                    user
         });
     } catch (e) {
         res.status(500).send({
