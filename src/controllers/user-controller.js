@@ -178,6 +178,7 @@ exports.get = async(req, res, next) => {
             {
                 usuario: [
                 {
+                    id: data._id,
                     nome: data.nome,
                     email: data.email,
                     administrador: data.administrador,
