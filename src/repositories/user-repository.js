@@ -42,7 +42,7 @@ exports.get = async() => {
     const res = await User.find(
         { "usuario": 
         {
-            id: _id,
+           // id: id,
             email: email,
             nome: nome,
             data_nascimento: "31/12/2018",
