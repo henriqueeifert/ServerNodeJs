@@ -42,5 +42,5 @@ exports.get = async() => {
     const res = await User.find({
         //active: true
     }, '_id nome email data_nascimento administrador');
-    return res;
+    return "{usuario: "+res+"}";
 }
