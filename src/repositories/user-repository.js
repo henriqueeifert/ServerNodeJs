@@ -43,12 +43,12 @@ exports.get = async() => {
         { "usuario": 
         {
            // id: id,
-            email: email,
-            nome: nome,
-            data_nascimento: "31/12/2018",
-            administrador: administrador
+           // email: email,
+           // nome: nome,
+           // data_nascimento: "31/12/2018",
+           // administrador: administrador
 
         //active: true
-    }}/*, '_id nome email data_nascimento administrador'*/);
+    }}, '_id nome email data_nascimento administrador');
     return res;
 }
