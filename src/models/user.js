@@ -8,7 +8,7 @@ const schema = new Schema({
         type: Number,
         required: true,
         unique: true,
-        default: 2//getNextSequence('userid')
+        default: 1//getNextSequence('userid')
     },
     nome: {
         type: String,
@@ -25,7 +25,8 @@ const schema = new Schema({
     },
     data_nascimento: {
         type: Date,
-        required: false          
+        required: false,
+        default: "31/12/2018"          
     },
     administrador: {
         type: Boolean,
