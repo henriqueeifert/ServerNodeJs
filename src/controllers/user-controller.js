@@ -22,7 +22,7 @@ exports.post = async(req, res, next) => {
         res.status(400).send(contract.errors()).end();
         return;
     }
-    const id = getNextSequence('user_id');
+   // const id = getNextSequence('user_id');
     try {   
         await repository.create({
         //    id:  id,
