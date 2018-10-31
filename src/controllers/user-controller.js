@@ -25,7 +25,7 @@ exports.post = async(req, res, next) => {
     const id = getNextSequence('user_id');
     try {   
         await repository.create({
-            id:  id,
+        //    id:  id,
             nome: req.body.nome,
             email: req.body.email,
             senha: md5(req.body.senha + global.SALT_KEY),
@@ -46,7 +46,7 @@ exports.post = async(req, res, next) => {
             mensagem: 'Usuário cadastrado com sucesso!',
             usuario: 
             {
-                id: id,
+            //    id: id,
                 nome: req.body.nome,
                 email: req.body.email,
                 administrador: true,
