@@ -7,7 +7,8 @@ const schema = new Schema({
     id: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
+        default: 2//getNextSequence('userid')
     },
     nome: {
         type: String,
