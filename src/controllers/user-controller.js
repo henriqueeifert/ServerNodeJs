@@ -56,7 +56,7 @@ exports.post = async(req, res, next) => {
     } catch (e) {
         //console.log(e);
         res.status(500).send({
-            mensagem: 'Falha ao processar sua requisição', data: e
+            mensagem: 'Falha ao processar sua requisição: '+e
         });
     }
 };
