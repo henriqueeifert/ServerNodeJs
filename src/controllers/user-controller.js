@@ -190,27 +190,21 @@ exports.get = async(req, res, next) => {
     }
 }
 
-exports.getId = async(req, res, next) => {
+exports.getById = async(req, res, next) => {
     try {
+        var data = await repository.getById(req.params.id);
         
-        const user = await repository.getById(data.id);
-
-        if (!user){
+        if (!data){
             res.status(401).send({
                mensagem: 'Usuário não encontrado'});            
             return;
         }
-
-        res.status(200).send(
-            {
-                usuario:                    
-                    user
-        });
+        
+        res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
             mensagem: 'Falha ao processar sua requisição: '+e
         });
     }
 }
-
 
