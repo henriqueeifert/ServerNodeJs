@@ -162,7 +162,14 @@ exports.put = async(req, res, next) => {
 };
 
 exports.delete = async(req, res, next) => {
-         
+        var data = await repository.getById(req.params.id);
+        
+        if (!data){
+            res.status(401).send({
+               mensagem: 'Usuário não encontrado'});            
+            return;
+        }else{
+
     try {
         await repository.delete(req.params.id)
 
@@ -175,6 +182,7 @@ exports.delete = async(req, res, next) => {
             mensagem: 'Erro ao excluir usuário'
         });
     }
+}
 };
 
 exports.get = async(req, res, next) => {
