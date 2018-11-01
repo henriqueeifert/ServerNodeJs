@@ -200,7 +200,7 @@ exports.getById = async(req, res, next) => {
             return;
         }
         
-        res.status(200).send(data);
+        res.status(200).send({usuario:data});
     } catch (e) {
         res.status(500).send({
             mensagem: 'Falha ao processar sua requisição: '+e
