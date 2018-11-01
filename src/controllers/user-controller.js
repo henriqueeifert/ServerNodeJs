@@ -132,14 +132,24 @@ exports.refreshToken = async(req, res, next) => {
 
 exports.put = async(req, res, next) => {
     try {
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];  
-        const data  = await authService.decodeToken(token);
+     //   const token = req.body.token || req.query.token || req.headers['x-access-token'];  
+     //   const data  = await authService.decodeToken(token);
         //
-        await repository.update(data.id, 
-            {   nome: req.body.nome,
-                email: req.body.email,
-                senha: md5(req.body.senha + global.SALT_KEY),
-                administrador: false});
+        if (req.body.senha){
+            await repository.update(data.id, 
+                {   nome: req.body.nome,
+                    email: req.body.email,
+                    //data_nascimento: req.body.data_nascimento,
+                    senha: md5(req.body.senha + global.SALT_KEY),
+                    administrador: req.body.administrador});
+        }else
+        {
+            await repository.update(data.id, 
+                {   nome: req.body.nome,
+                    email: req.body.email,  
+                    //data_nascimento: req.body.data_nascimento,                  
+                    administrador: req.body.administrador});                
+        }
 
         res.status(200).send({
             mensagem: 'Usuário atualizado com sucesso!',
@@ -147,9 +157,9 @@ exports.put = async(req, res, next) => {
             {
             nome: req.body.nome,
             email: req.body.email,
-            senha: md5(req.body.senha + global.SALT_KEY),
-            administrador: false,
-            data_nascimento: "31/12/2018"
+         //   senha: md5(req.body.senha + global.SALT_KEY),
+            administrador: req.body.administrador,
+        //    data_nascimento: req.body.data_nascimento
         }
 
 
@@ -165,7 +175,7 @@ exports.delete = async(req, res, next) => {
         var data = await repository.getById(req.params.id);
         
         if (!data){
-            res.status(401).send({
+            res.status(400).send({
                mensagem: 'Usuário não encontrado'});            
             return;
         }else{
@@ -179,7 +189,7 @@ exports.delete = async(req, res, next) => {
         });
     } catch (e) {
         res.status(400).send({
-            mensagem: 'Erro ao excluir usuário'
+            mensagem: 'Erro ao excluir usuário '+e
         });
     }
 }
@@ -201,22 +211,12 @@ exports.get = async(req, res, next) => {
     }
 }
 
-exports.getById = async(req, res, next) => {
-
-    
+exports.getById = async(req, res, next) => {    
     try {
-        var data = await repository.getById(req.params.id);
-        
-        if (!data){
-            res.status(401).send({
-               mensagem: 'Usuário não encontrado'});            
-            return;
-        }else{        
         res.status(200).send({usuario: data});
-        }
     } catch (e) {
-        res.status(500).send({
-            mensagem: 'Falha ao processar sua requisição : '+e
+        res.status(400).send({
+            mensagem: 'Usuário não encontrado'
         });
     }
 }
