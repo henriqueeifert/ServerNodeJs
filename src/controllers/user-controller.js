@@ -169,8 +169,8 @@ exports.delete = async(req, res, next) => {
         res.status(400).send({
            mensagem: 'Usuário não encontrado'});            
         return;
-    }else{
-    
+    }
+    else{    
     try {
         await repository.delete(req.params.id)
 
