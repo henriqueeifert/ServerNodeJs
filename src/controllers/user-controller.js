@@ -162,15 +162,7 @@ exports.put = async(req, res, next) => {
 };
 
 exports.delete = async(req, res, next) => {
-        
-    const user = await repository.getById(req.params.id);
-        
-    if (!user){
-        res.status(400).send({
-           mensagem: 'Usuário não encontrado'});            
-        return;
-    }
-    else{    
+         
     try {
         await repository.delete(req.params.id)
 
@@ -179,11 +171,10 @@ exports.delete = async(req, res, next) => {
             mensagem: 'Usuário removido com sucesso!'
         });
     } catch (e) {
-        res.status(500).send({
-            mensagem: 'Falha ao processar sua requisição'
+        res.status(400).send({
+            mensagem: 'Erro ao excluir usuário'
         });
     }
-}
 };
 
 exports.get = async(req, res, next) => {
