@@ -19,8 +19,7 @@ const schema = new Schema({
     },
     data_nascimento: {
         type: Date,
-        required: false,
-        default: Date.now
+        required: true
     },
     administrador: {
         type: Boolean,

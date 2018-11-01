@@ -5,11 +5,11 @@ const User     = mongoose.model('User');
 
 exports.create = async(data) => {
     var user = new User(data);
-    await user.save();
+    return await user.save();
 }
 
 exports.update = async(id, data) => {
-    await User
+    return await User
         .findByIdAndUpdate(id, data);
 }
 
@@ -26,7 +26,8 @@ exports.authenticate = async(data) => {
 }
 
 exports.getById = async(id) => {
-    const  res = await User.findById(id);
+    //const  res = await User.findById(id);
+    const  res = await User.findOne({_id : id}, 'id nome email data_nascimento administrador');
     return res;
 }
 
@@ -38,9 +39,6 @@ exports.getByEmail = async(email) => {
     return res;
 }
 exports.get = async() => {
-    const res = await User.find(
-        {
-            //active: true
-        }, 'nome id email data_nascimento administrador');
-    return res;
+    const res = await User.find({}, 'nome _id email data_nascimento administrador');
+    return await res;
 }

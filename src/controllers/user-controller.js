@@ -1,5 +1,6 @@
 'use strict';
 
+const moment = require('moment');
 const ValidationContract = require('../validators/fluent-validator');
 const repository = require('../repositories/user-repository');
 const md5 = require('md5');
@@ -19,19 +20,23 @@ exports.post = async(req, res, next) => {
     //var data_henrique = dateFormat(req.body.data_nascimento, "yyyy-mm-dd h:MM:ss");
     // Se os dados forem inválidos
     if (!contract.isValid()) {
-        res.status(400).send(contract.errors()).end();
+        res.status(400).send(
+            
+            contract.errors()).end();
+
         return;
     }
-    //const id = getNextSequence('userid');
     try {   
-        await repository.create({
-            //id:  id,
+        
+        let savedUser = await repository.create({
             nome: req.body.nome,
             email: req.body.email,
             senha: md5(req.body.senha + global.SALT_KEY),
-            administrador: true
-        }
-        );
+            administrador: req.body.administrador,
+            data_nascimento: new Date(req.body.data_nascimento)
+        });
+        
+        /*
         try{
             console.log('email para: '+req.body.email);  
             emailService.send(req.body.email, 
@@ -41,16 +46,20 @@ exports.post = async(req, res, next) => {
         } catch (e) {
             console.log('Erro envio de e-mail: '+e);
         }
+*/
 
+        let dateStr = moment(savedUser.data_nascimento).format('YYYY-MM-DD');
         res.status(200).send({
+
             mensagem: 'Usuário cadastrado com sucesso!',
             usuario: 
             {
-            //    id: id,
-                nome: req.body.nome,
-                email: req.body.email,
-                administrador: true,
-                data_nascimento: "31/12/2018"
+                id: savedUser._id,
+                nome: savedUser.nome,
+                email: savedUser.email,
+                administrador: savedUser.administrador,
+                data_nascimento:  dateStr
+                //)new Date(savedUser.data_nascimento
             }            
         });
     } catch (e) {
@@ -104,7 +113,7 @@ exports.refreshToken = async(req, res, next) => {
         const user = await repository.getById(data.id);
         
         if (!user){
-            res.status(401).send({
+            res.status(400).send({
                mensagem: 'Usuário não encontrado'});            
             return;
         }
@@ -135,38 +144,43 @@ exports.put = async(req, res, next) => {
      //   const token = req.body.token || req.query.token || req.headers['x-access-token'];  
      //   const data  = await authService.decodeToken(token);
         //
+        var data = await repository.getById(req.params.id);
+
+        if (!data){
+            res.status(400).send({
+               mensagem: 'Usuário não encontrado'});            
+            return;
+        }        
         if (req.body.senha){
-            await repository.update(data.id, 
+            const savedUser = await repository.update(req.params.id, 
                 {   nome: req.body.nome,
                     email: req.body.email,
-                    //data_nascimento: req.body.data_nascimento,
+                    data_nascimento: new Date(req.body.data_nascimento),
                     senha: md5(req.body.senha + global.SALT_KEY),
                     administrador: req.body.administrador});
         }else
         {
-            await repository.update(data.id, 
+            const savedUser = await repository.update(req.params.id, 
                 {   nome: req.body.nome,
                     email: req.body.email,  
-                    //data_nascimento: req.body.data_nascimento,                  
+                    data_nascimento: new Date(req.body.data_nascimento),                  
                     administrador: req.body.administrador});                
         }
-
         res.status(200).send({
             mensagem: 'Usuário atualizado com sucesso!',
             usuario: 
             {
-            nome: req.body.nome,
-            email: req.body.email,
-         //   senha: md5(req.body.senha + global.SALT_KEY),
-            administrador: req.body.administrador,
-        //    data_nascimento: req.body.data_nascimento
+                id: req.params.id,
+                nome: req.body.nome,
+                email: req.body.email,
+                administrador: req.body.administrador,
+                data_nascimento: moment(req.body.data_nascimento).format('YYYY-MM-DD')
+                //req.body.data_nascimento
         }
-
-
         });
     }catch (e){
         res.status(500).send({
-            mensagem: 'Falha ao processar sua requisição: '+e
+            mensagem: 'Erro interno '+e
         });
     }
 };
@@ -189,7 +203,7 @@ exports.delete = async(req, res, next) => {
         });
     } catch (e) {
         res.status(400).send({
-            mensagem: 'Erro ao excluir usuário '+e
+            mensagem: 'Erro ao excluir usuário ID: '+data.id+''+e
         });
     }
 }
@@ -201,8 +215,7 @@ exports.get = async(req, res, next) => {
         
         res.status(200).send(
             {
-                usuarios:                    
-                    user
+                usuarios: user
         });
     } catch (e) {
         res.status(500).send({
@@ -212,8 +225,21 @@ exports.get = async(req, res, next) => {
 }
 
 exports.getById = async(req, res, next) => {    
+    var data = await repository.getById(req.params.id);
+
     try {
-        res.status(200).send({usuario: data});
+        res.status(200).send(            
+            {
+                usuario:                 
+                {
+                    id: data._id,
+                    nome: data.nome,
+                    email: data.email,
+                    data_nascimento: moment(data.data_nascimento).format('YYYY-MM-DD'),
+                    administrador: data.administrador
+                }
+            }
+            );
     } catch (e) {
         res.status(400).send({
             mensagem: 'Usuário não encontrado'
