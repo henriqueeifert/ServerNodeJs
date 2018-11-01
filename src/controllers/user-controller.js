@@ -10,9 +10,16 @@ const emailService = require('../services/email-service');
 
 exports.post = async(req, res, next) => {
     let contract = new ValidationContract();
+
     contract.hasMinLen(req.body.nome, 3, 'O nome do usuário deve conter pelo menos 3 caracteres');
     contract.isEmail(req.body.email, 'O e-mail do usuário informado está inválido');
     contract.hasMinLen(req.body.senha, 6, 'A Senha deve conter pelo menos 6 caracteres');
+    contract.isRequired(req.body.nome,'Nome requerido');
+    contract.isRequired(req.body.email,'Email requerido');
+    contract.isRequired(req.body.senha,'Senha requerido');
+    contract.isRequired(req.body.data_nascimento,'Data Nascimento requerido');
+    contract.isRequired(req.body.administrador,'Administrador requerido');
+
     //
     //console.log(''+req.body.data_nascimento);
     //
@@ -20,10 +27,13 @@ exports.post = async(req, res, next) => {
     //var data_henrique = dateFormat(req.body.data_nascimento, "yyyy-mm-dd h:MM:ss");
     // Se os dados forem inválidos
     if (!contract.isValid()) {
-        res.status(400).send(
-            
-            contract.errors()).end();
-
+        res.status(400).send({
+            mensagem: 'Erro ao incluir o usuário!',
+            erros: {
+                nome: [
+                    'Informações inválidas'
+            ]                    
+        }});               
         return;
     }
     try {   
