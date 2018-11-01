@@ -180,7 +180,8 @@ exports.get = async(req, res, next) => {
         res.status(200).send(
             {
                 usuarios:
-                    user
+                    user.id,
+                    user.nome
         });
     } catch (e) {
         res.status(500).send({
