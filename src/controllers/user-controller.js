@@ -179,9 +179,8 @@ exports.get = async(req, res, next) => {
         var user = await repository.get();
         res.status(200).send(
             {
-                usuarios:
-                    user.id,
-                    user.nome
+                usuarios:                    
+                    user
         });
     } catch (e) {
         res.status(500).send({
