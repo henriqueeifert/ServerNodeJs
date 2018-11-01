@@ -4,12 +4,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    id: {
-        type: Number,
-        required: true,
-        unique: true,
-        default: 1//getNextSequence('userid')
-    },
     nome: {
         type: String,
         required: true
