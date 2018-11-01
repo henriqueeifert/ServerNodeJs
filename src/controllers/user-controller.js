@@ -225,8 +225,7 @@ exports.get = async(req, res, next) => {
         
         res.status(200).send(
             {
-                usuarios: user
-                        
+                usuarios: user                        
         });
     } catch (e) {
         res.status(500).send({
