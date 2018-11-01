@@ -177,6 +177,7 @@ exports.delete = async(req, res, next) => {
 exports.get = async(req, res, next) => {
     try {
         var user = await repository.get();
+        
         res.status(200).send(
             {
                 usuarios:                    
@@ -188,3 +189,28 @@ exports.get = async(req, res, next) => {
         });
     }
 }
+
+exports.getId = async(req, res, next) => {
+    try {
+        
+        const user = await repository.getById(data.id);
+
+        if (!user){
+            res.status(401).send({
+               mensagem: 'Usuário não encontrado'});            
+            return;
+        }
+
+        res.status(200).send(
+            {
+                usuario:                    
+                    user
+        });
+    } catch (e) {
+        res.status(500).send({
+            mensagem: 'Falha ao processar sua requisição: '+e
+        });
+    }
+}
+
+

@@ -6,12 +6,13 @@ const controller  = require('../controllers/user-controller');
 const authService = require('../services/auth-service');
 
 router.get('/',controller.get);
+router.get('/:id',controller.getId);
 router.post('/',controller.post);
-router.post('/authenticate', controller.authenticate);
-router.post('/refreshToken', authService.authorize, controller.refreshToken);
+//router.post('/authenticate', controller.authenticate);
+//router.post('/refreshToken', authService.authorize, controller.refreshToken);
 
-router.put('/',authService.isAdmin, controller.put);
-router.delete('/',authService.isAdmin, controller.delete);
+router.put('/:id',/*authService.isAdmin,*/ controller.put);
+router.delete('/:id',/*,authService.isAdmin,*/ controller.delete);
 //router.post('/',authService.authorize ,controller.put);
 
 module.exports = router;
