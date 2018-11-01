@@ -13,9 +13,8 @@ exports.update = async(id, data) => {
         .findByIdAndUpdate(id, data);
 }
 
-exports.delete = async(email) => {
-    await User
-        .findOneAndRemove(email);
+exports.delete = async(id) => {
+    await User.findOneAndRemove(id);
 }
 
 exports.authenticate = async(data) => {
