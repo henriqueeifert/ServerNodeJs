@@ -202,6 +202,8 @@ exports.get = async(req, res, next) => {
 }
 
 exports.getById = async(req, res, next) => {
+
+    
     try {
         var data = await repository.getById(req.params.id);
         
@@ -209,9 +211,9 @@ exports.getById = async(req, res, next) => {
             res.status(401).send({
                mensagem: 'Usuário não encontrado'});            
             return;
-        }
-        
+        }else{        
         res.status(200).send({usuario: data});
+        }
     } catch (e) {
         res.status(500).send({
             mensagem: 'Falha ao processar sua requisição : '+e
