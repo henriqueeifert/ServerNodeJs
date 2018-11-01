@@ -169,7 +169,7 @@ exports.delete = async(req, res, next) => {
         res.status(400).send({
            mensagem: 'Usuário não encontrado'});            
         return;
-    }
+    }else{
     
     try {
         await repository.delete(req.params.id)
@@ -183,6 +183,7 @@ exports.delete = async(req, res, next) => {
             mensagem: 'Falha ao processar sua requisição'
         });
     }
+}
 };
 
 exports.get = async(req, res, next) => {
