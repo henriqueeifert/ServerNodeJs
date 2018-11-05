@@ -4,17 +4,19 @@ const express    = require('express');
 const mongoose   = require('mongoose');
 const bodyParser = require('body-parser');
 const config     = require('./config');
-const app = express();
-const router = express.Router();
+const app        = express();
+const router     = express.Router();
 
 //conecta MongoDB 
 mongoose.connect(config.connectionString);
 //carrega models
-const Customer  = require('./models/user');
+const User     = require('./models/user');
+const Pergunta = require('./models/pergunta');
 
 //carrega rotas
 const indexRoute = require('./routes/index-route');
 const userRoute  = require('./routes/user-route');
+const perguntaRoute  = require('./routes/pergunta-route');
 
 app.use(bodyParser.json({
     limit: '1mb' }));
@@ -30,5 +32,6 @@ app.use(function(req,res,next){
 
 app.use('/', indexRoute);
 app.use('/api/usuario', userRoute);
+app.use('/api/questionatio/perguntas', perguntaRoute);
 
 module.exports = app; 
