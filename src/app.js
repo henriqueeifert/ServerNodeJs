@@ -18,7 +18,7 @@ const userRoute  = require('./routes/user-route');
 
 app.use(bodyParser.json({
     limit: '1mb' }));
-app.use(bodyParser.urlencoded({
+app.use(bodyParser.urlencoded({ 
     extended: false }));
 //
 app.use(function(req,res,next){
