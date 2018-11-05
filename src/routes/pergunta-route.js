@@ -10,8 +10,8 @@ router.post('/',controller.post);
 //router.post('/authenticate', controller.authenticate);
 //router.post('/refreshToken', authService.authorize, controller.refreshToken);
 
-router.put('/:id',/*authService.isAdmin,*/ controller.put);
-router.delete('/:id',/*,authService.isAdmin,*/ controller.delete);
+//router.put('/:id',/*authService.isAdmin,*/ controller.put);
+//router.delete('/:id',/*,authService.isAdmin,*/ controller.delete);
 //router.post('/',authService.authorize ,controller.put);
 
 module.exports = router;
