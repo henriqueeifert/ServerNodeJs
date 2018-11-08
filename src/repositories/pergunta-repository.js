@@ -9,6 +9,6 @@ exports.create = async(data) => {
 }
 //
 exports.get = async() => {
-    const res = await Pergunta.find({}, '_id texto');
+    const res = await Pergunta.find({}, 'id texto');
     return await res;
 }
