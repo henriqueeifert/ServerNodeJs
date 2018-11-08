@@ -9,8 +9,7 @@ exports.post = async(req, res, next) => {
     try {   
         
         let savedPergunta = await repository.create({
-            texto: req.body.texto,
-            pontuacao: req.body.pontuacao
+            texto: req.body.texto
         });
 
         res.status(200).send({
@@ -19,8 +18,7 @@ exports.post = async(req, res, next) => {
         pergunta: 
         {
             id: savedPergunta._id,
-            texto: savedPergunta.texto,
-            pontuacao: savedPergunta.pontuacao
+            texto: savedPergunta.texto
         } });
     } catch (e) {
         res.status(500).send({
