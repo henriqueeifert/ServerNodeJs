@@ -14,11 +14,13 @@ var conect = mongoose.connect(config.connectionString);
 //carrega models
 const User     = require('./models/user');
 const Pergunta = require('./models/pergunta');
+const Gabarito = require('./models/gabarito');
 
 //carrega rotas
 const indexRoute = require('./routes/index-route');
 const userRoute  = require('./routes/user-route');
 const perguntaRoute  = require('./routes/pergunta-route');
+const gabaritoRoute  = require('./routes/gabarito-route');
 
 app.use(bodyParser.json({
     limit: '1mb' }));
@@ -35,5 +37,6 @@ app.use(function(req,res,next){
 app.use('/', indexRoute);
 app.use('/api/usuario', userRoute);
 app.use('/api/questionario/perguntas', perguntaRoute);
+app.use('/api/questionario/gabaritos', gabaritoRoute);
 
 module.exports = app; 
