@@ -36,7 +36,7 @@ exports.post = async(req, res, next) => {
 exports.get = async(req, res, next) => {
     try {
         var gabarito = await repository.get();
-        
+        //res.set('Content-Type', 'application/json');
         res.status(200).send(
             {
                 gabaritos: gabarito

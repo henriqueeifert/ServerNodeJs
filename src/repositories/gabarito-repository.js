@@ -9,6 +9,7 @@ exports.create = async(data) => {
 }
 //
 exports.get = async() => {
+    
     const res = await Gabarito.find({})
                         .select("id pontuacao descricao resultado");
     return await res;
