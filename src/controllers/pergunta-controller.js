@@ -1,6 +1,6 @@
 'use strict';
 
-
+const mongoose = require('mongoose');
 const repository = require('../repositories/pergunta-repository');
 
 exports.post = async(req, res, next) => {
@@ -9,18 +9,19 @@ exports.post = async(req, res, next) => {
     try {   
         
         let savedPergunta = await repository.create({
-            texto: req.body.texto
-        });
+            texto: req.body.texto,
+            id: new mongoose.Types.ObjectId
+             });
 
         res.status(200).send({
 
         mensagem: 'Pergunta cadastrada com sucesso!',
         pergunta: 
         {
-            id: savedPergunta._id,
+            id: savedPergunta.id,
             texto: savedPergunta.texto
         } });
-    } catch (e) {
+    }catch (e) {
         res.status(500).send({
             mensagem: 'Falha ao processar sua requisição: '+e
         });
@@ -34,7 +35,8 @@ exports.get = async(req, res, next) => {
         res.status(200).send(
             {
                 perguntas: pergunta
-        });
+        }
+        );
     } catch (e) {
         res.status(500).send({
             mensagem: 'Falha ao processar sua requisição: '+e

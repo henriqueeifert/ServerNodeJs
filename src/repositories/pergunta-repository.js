@@ -9,6 +9,7 @@ exports.create = async(data) => {
 }
 //
 exports.get = async() => {
-    const res = await Pergunta.find({}, 'id texto');
+    const res = await Pergunta.find({})
+                        .select("id texto");
     return await res;
 }
