@@ -10,5 +10,4 @@ const schema = new Schema({
     }
 });
 
-
 module.exports = mongoose.model('Pergunta', schema);
