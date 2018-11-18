@@ -10,6 +10,6 @@ exports.create = async(data) => {
 //
 exports.get = async() => {
     const res = await Pergunta.find({})
-                        .select("id texto");
+                        .select("id pontuacao texto");
     return await res;
 }

@@ -10,6 +10,7 @@ exports.post = async(req, res, next) => {
         
         let savedPergunta = await repository.create({
             texto: req.body.texto,
+            pontuacao: req.body.pontuacao,
             id: new mongoose.Types.ObjectId
              });
 
@@ -19,6 +20,7 @@ exports.post = async(req, res, next) => {
         pergunta: 
         {
             id: savedPergunta.id,
+            pontuacao: savedPergunta.pontuacao,
             texto: savedPergunta.texto
         } });
     }catch (e) {

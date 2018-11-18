@@ -29,8 +29,10 @@ app.use(bodyParser.urlencoded({
 //
 app.use(function(req,res,next){
     //res.header('Access-Control-Allow-Origin','*');
-    res.header('Access-Control-Allow-Headers','Content-Type'/*'*','x-access-token','X-Requested-With','Accept','Origin','X-Requested-with'*/);
-    res.header('Access-Control-Allow-Methods','GET','POST', 'DELETE','PUT');
+    //res.type('application/json');
+    res.header();
+    //res.header('Access-Control-Allow-Headers','Content-Type'/*'*','x-access-token','X-Requested-With','Accept','Origin','X-Requested-with'*/);
+    //res.header('Access-Control-Allow-Methods','GET','POST', 'DELETE','PUT');
     next();
 })
 

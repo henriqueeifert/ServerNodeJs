@@ -8,6 +8,11 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    pontuacao:{
+        type: Number,
+        required: true,
+        default: 1
+    },
     id: {
         type: mongoose.Types.ObjectId        
     }    

@@ -21,9 +21,9 @@ exports.post = async(req, res, next) => {
         gabarito: 
         {
             id: savedGabarito.id,
-            pontuacao: req.body.pontuacao,
-            resultado: req.body.resultado,
-            descricao: req.body.descricao
+            pontuacao: savedGabarito.pontuacao,
+            resultado: savedGabarito.resultado,
+            descricao: savedGabarito.descricao
             
         } });
     }catch (e) {
