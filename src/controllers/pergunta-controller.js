@@ -37,7 +37,7 @@ exports.get = async(req, res, next) => {
         res.status(200).send(
             {
                 perguntas: pergunta
-        }
+            }
         );
     } catch (e) {
         res.status(500).send({

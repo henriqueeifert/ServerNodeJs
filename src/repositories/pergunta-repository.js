@@ -9,7 +9,6 @@ exports.create = async(data) => {
 }
 //
 exports.get = async() => {
-    const res = await Pergunta.find({})
-                        .select("id pontuacao texto");
+    const res = await Pergunta.find({})                        ;
     return await res;
 }
