@@ -34,7 +34,7 @@ exports.get = async(req, res, next) => {
     try {
         var pergunta = await repository.get();
         
-        res.status(200).send(
+        res.status(200).json(
             {
                 perguntas: pergunta
         }
