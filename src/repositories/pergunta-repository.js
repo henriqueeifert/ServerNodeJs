@@ -26,7 +26,7 @@ exports.getById = async(id) => {
 
 exports.update = async(id, data) => {
     return await Pergunta
-        .findByIdAndUpdate(id, data);
+        .findByIdAndUpdate({id:id}, data);
 }
 
 exports.delete = async(id) => {
