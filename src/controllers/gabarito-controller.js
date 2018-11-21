@@ -54,7 +54,7 @@ exports.getById = async(req, res, next) => {
     try {
         res.status(200).send(            
             {
-                pergunta: {
+                gabarito: {
                     id: data.id,
                     pontuacao: data.pontuacao,
                     resultado: data.resultado,
@@ -81,7 +81,7 @@ exports.delete = async(req, res, next) => {
         await repository.delete(req.params.id)
         
         res.status(200).send({
-            mensagem: 'Gabarito removida com sucesso!'
+            mensagem: 'Gabarito removido com sucesso!'
         });
     } catch (e) {
         res.status(400).send({
