@@ -32,8 +32,7 @@ exports.post = async(req, res, next) => {
 
 exports.get = async(req, res, next) => {
     try {
-        var pergunta = await repository.get();
-        
+        var pergunta   = await repository.get();
         res.status(200).send(
             {
                 perguntas: pergunta
