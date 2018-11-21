@@ -1,17 +1,24 @@
 'use strict';
 
 const mongoose = require('mongoose');
-//const repository = require('../repositories/calcular-repository');
+const repository = require('../repositories/pergunta-repository');
 
 exports.post = async(req, res, next) => {
     try {   
         var qtPergutas = 0;
         for (var i = 0; i < req.body.perguntas.length; i++) {
+            //
+            var data = await repository.pontuacaoById(req.body.perguntas[i]);
+            //
+            console.log('vale: '+data);
+            /*
             var idPergunta = req.body.perguntas[i];
             if (idPergunta) {
                 qtPergutas = qtPergutas + 1;
             }
             console.log(idPergunta);
+            */
+
         }    
         //
         console.log(qtPergutas); 

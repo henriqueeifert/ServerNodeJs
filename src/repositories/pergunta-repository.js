@@ -15,8 +15,17 @@ exports.get = async() => {
 }
 
 exports.pontuacaoById = async(id) => {
-    const  res = await Pergunta.findOne({id : id});
-    return res;
+    console.log('id pontuacaoById: '+id);
+    try{
+    var res = await Pergunta.findOne({id : id});
+    console.log('ERRO: '+id);
+        return await res.pontuacao;
+
+    }catch (e) {
+        res.status(400).send({
+            mensagem: 'Pergunta '+id+' não encontrada'});            
+         return; 
+    }    
 }
 
 exports.getById = async(id) => {
