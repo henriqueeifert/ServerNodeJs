@@ -21,6 +21,7 @@ const indexRoute = require('./routes/index-route');
 const userRoute  = require('./routes/user-route');
 const perguntaRoute  = require('./routes/pergunta-route');
 const gabaritoRoute  = require('./routes/gabarito-route');
+const calcularRoute  = require('./routes/calcular-route');
 
 app.use(bodyParser.json({
     limit: '1mb' }));
@@ -52,5 +53,6 @@ app.use('/', indexRoute);
 app.use('/api/usuario', userRoute);
 app.use('/api/questionario/perguntas', perguntaRoute);
 app.use('/api/questionario/gabaritos', gabaritoRoute);
+app.use('/api/questionario/calcular', calcularRoute);
 
 module.exports = app; 
