@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 const repository = require('../repositories/pergunta-repository');
 
 exports.post = async(req, res, next) => {
-
-
     try {   
         
         let savedPergunta = await repository.create({
@@ -44,3 +42,78 @@ exports.get = async(req, res, next) => {
         });
     }
 }
+exports.pontuacaoById = async(req, res, next) => {    
+    var data = await repository.pontuacaoById(req.params.id);
+        
+    try {
+        return data.pontuacao;
+    } catch (e) {
+        res.status(400).send({
+            mensagem: 'Pontuacao pergunta '+req.params.id+' não encontrada'
+        });
+    }
+}
+
+exports.getById = async(req, res, next) => {    
+    var data = await repository.getById(req.params.id);
+        
+    try {
+        return data;
+    } catch (e) {
+        res.status(400).send({
+            mensagem: 'Pergunta '+req.params.id+' não encontrada'
+        });
+    }
+}
+
+exports.delete = async(req, res, next) => {
+    var data = await repository.getById(req.params.id);
+    
+    if (!data){
+        res.status(400).send({
+           mensagem: 'Pergunta não encontrada'});            
+        return;
+    }else{
+
+    try {
+        await repository.delete(req.params.id)
+        
+        res.status(200).send({
+            mensagem: 'Pergunta removida com sucesso!'
+        });
+    } catch (e) {
+        res.status(400).send({
+            mensagem: 'Erro ao excluir Pergunta ID: '+data.id+''+e
+            });
+        }
+    }
+};
+
+exports.put = async(req, res, next) => {
+    try {
+        var data = await repository.getById(req.params.id);
+
+        if (!data){
+            res.status(400).send({
+               mensagem: 'Pergunta '+req.params.id+' não encontrada'});            
+            return;
+        }        
+        const savedPergunta = await repository.update(req.params.id, 
+                {   pontuacao: req.body.pontuacao,
+                    texto: req.body.texto});
+
+        res.status(200).send({
+            mensagem: 'Pergunta atualizada com sucesso!',
+            pergunta: 
+            {
+                id: req.params.id,
+                pontuacao: req.body.pontuacao,
+                texto: req.body.texto
+            }
+        });
+    }catch (e){
+        res.status(500).send({
+            mensagem: 'Erro interno '+e
+        });
+    }
+};

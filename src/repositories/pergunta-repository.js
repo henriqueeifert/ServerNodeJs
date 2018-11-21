@@ -9,13 +9,26 @@ exports.create = async(data) => {
 }
 //
 exports.get = async() => {
-    const resp = await //Pergunta.find({},null,null,function(err, docs){});
-
-    //Pergunta.find({}, 'pontuacao texto', function (err, docs) { });
-    Pergunta.find({});
-    //console.log(resp);
-    //console.log(JSON.stringify(resp,['id','texto','pontuacao']));
-    var respStr = JSON.stringify(resp,['id','texto','pontuacao']);
-
+    const resp    = await Pergunta.find({});
+    var   respStr = JSON.stringify(resp,['id','texto','pontuacao']);
     return await JSON.parse(respStr);
+}
+
+exports.pontuacaoById = async(id) => {
+    const  res = await Pergunta.findOne({id : id});
+    return res;
+}
+
+exports.getById = async(id) => {
+    const  res = await Pergunta.findOne({id : id});
+    return res;
+}
+
+exports.update = async(id, data) => {
+    return await Pergunta
+        .findByIdAndUpdate(id, data);
+}
+
+exports.delete = async(id) => {
+    await Pergunta.findOneAndRemove(id);
 }
