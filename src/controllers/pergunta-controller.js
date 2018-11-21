@@ -58,7 +58,14 @@ exports.getById = async(req, res, next) => {
     var data = await repository.getById(req.params.id);
         
     try {
-        return data;
+        res.status(200).send(            
+            {
+                pergunta: {
+                    id: data.id,
+                    pontuacao: data.pontuacao,
+                    texto: data.texto                
+                }
+            });
     } catch (e) {
         res.status(400).send({
             mensagem: 'Pergunta '+req.params.id+' não encontrada'
