@@ -10,9 +10,9 @@ exports.post = async(req, res, next) => {
         var qtPergutas = 0;
         for (var i = 0; i < req.body.perguntas.length; i++) {
             //
-            var data = await repository.pontuacaoById(req.body.perguntas[i]);
+            //var data = await repository.pontuacaoById(req.body.perguntas[i]);
             
-            console.log(data);
+            //console.log(data);
             /*
             var idPergunta = req.body.perguntas[i];
             if (idPergunta) {
@@ -23,10 +23,14 @@ exports.post = async(req, res, next) => {
 
         }    
         // 
-        console.log(qtPergutas); 
+        //console.log(qtPergutas); 
 
         res.status(200).send({
-            mensagem: "Resultado Calculado com Sucesso"
+            "mensagem": "Resultado Calculado com Sucesso",
+              "resultado": {"pontuacao": 1,
+                            "resultado": "teste",
+                            "descricao": "desc",
+                            "data": "2018-11-20"}
         });
 
     }catch (e) {
