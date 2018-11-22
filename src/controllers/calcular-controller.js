@@ -8,7 +8,9 @@ exports.post = async(req, res, next) => {
         console.log(req.body);
         if (req.body != 'perguntas'){
             console.log('ERRO');
-
+            res.status(400).send({
+                mensagem: 'JSON inválido: '+req.body
+            });            
         }
     
         var qtPergutas = 0;
