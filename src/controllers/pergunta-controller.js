@@ -15,7 +15,7 @@ exports.post = async(req, res, next) => {
             });            
             return;
         }         
-        if (!req.body.pontuacao || req.body.pontuacao.length < 0){
+        if (!req.body.pontuacao || req.body.pontuacao < 0){
             res.status(400).send({
                 mensagem: 'Erro ao incluir Pergunta',
                 erros: {
