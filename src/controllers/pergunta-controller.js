@@ -105,7 +105,7 @@ exports.put = async(req, res, next) => {
                mensagem: 'Pergunta '+req.params.id+' não encontrada'});            
             return;
         }        
-        const savedPergunta = await repository.update(req.params.id, 
+        const savedPergunta = await repository.update(data._id, 
                 {   pontuacao: req.body.pontuacao,
                     texto: req.body.texto});
 

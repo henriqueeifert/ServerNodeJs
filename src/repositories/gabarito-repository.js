@@ -19,7 +19,7 @@ exports.getById = async(id) => {
     return res;
 }
 
-exports.update = async(id, data) => {
+exports.update = async(id, data) => {    
     return await Gabarito
         .findByIdAndUpdate({id:id}, data);
 }
