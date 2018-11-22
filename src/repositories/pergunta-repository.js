@@ -15,11 +15,19 @@ exports.get = async() => {
 }
 
 exports.pontuacaoById = async(id) => {
+    var res = await Pergunta.find({id : id});
+    return await res;
+}
+
+exports.pontuacao2ById = async(id) => {
     console.log('id pontuacaoById: '+id);
     try{
-    var res = await Pergunta.findOne({id : id});
-    console.log('ERRO: '+id);
-        return await res.pontuacao;
+    var res = await Pergunta.find({id : id});
+
+    if (!res){
+        console.log('invalid');
+    }
+        return await res;
 
     }catch (e) {
         res.status(400).send({
