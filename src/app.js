@@ -51,8 +51,9 @@ app.use(function(req,res,next){
 
 app.use('/', indexRoute);
 app.use('/api/usuario', userRoute);
+app.use('/api/pergunta', perguntaRoute);
+app.use('/api/gabarito', gabaritoRoute);
 app.use('/api/questionario/perguntas', perguntaRoute);
-app.use('/api/questionario/gabaritos', gabaritoRoute);
 app.use('/api/questionario/calcular', calcularRoute);
 
 module.exports = app; 
