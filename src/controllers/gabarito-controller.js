@@ -100,7 +100,7 @@ exports.put = async(req, res, next) => {
                mensagem: 'Gabarito '+req.params.id+' não encontrado'});            
             return;
         }        
-        const savedGabarito = await repository.update(req.params.id, 
+        const savedGabarito = await repository.update(data._id, 
                 {   pontuacao: req.body.pontuacao,
                     resultado: req.body.resultado,
                     descricao: req.body.descricao}                    

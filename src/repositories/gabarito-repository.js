@@ -21,7 +21,7 @@ exports.getById = async(id) => {
 
 exports.update = async(id, data) => {    
     return await Gabarito
-        .findByIdAndUpdate({id:id}, data);
+        .findByIdAndUpdate(id, data);
 }
 
 exports.delete = async(id) => {

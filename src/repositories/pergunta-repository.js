@@ -43,7 +43,7 @@ exports.getById = async(id) => {
 
 exports.update = async(id, data) => {
     return await Pergunta
-        .findByIdAndUpdate({id:id}, data);
+        .findByIdAndUpdate(id, data);
 }
 
 exports.delete = async(id) => {
