@@ -9,7 +9,7 @@ exports.post = async(req, res, next) => {
         if (req.body != 'perguntas'){
             console.log('ERRO');
             res.status(400).send({
-                mensagem: 'JSON inválido: '+req.body
+                mensagem: 'JSON inválido, favor verificar a sintaxe '
             });            
         }
     
