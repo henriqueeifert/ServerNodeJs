@@ -12,7 +12,7 @@ exports.post = async(req, res, next) => {
             //
             var data = await repository.pontuacaoById(req.body.perguntas[i]);
             
-            qtPergutas += data.pontuacao;
+            qtPergutas = qtPergutas + data.pontuacao;
             //console.log(data);
             /*
             var idPergunta = req.body.perguntas[i];
@@ -29,7 +29,7 @@ exports.post = async(req, res, next) => {
         res.status(200).send({
             "mensagem": "Resultado Calculado com Sucesso",
               "resultado": {"pontuacao": ''+qtPergutas+'',
-                            "resultado": "teste"+qtPergutas+"",
+                            "resultado": "teste: "+qtPergutas+":",
                             "descricao": "desc",
                             "data": "2018-11-20"}
         });
