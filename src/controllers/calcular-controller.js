@@ -5,6 +5,12 @@ const repository = require('../repositories/pergunta-repository');
 
 exports.post = async(req, res, next) => {
     try {   
+        console.log(req.body);
+        if (req.body != 'perguntas'){
+            console.log('ERRO');
+
+        }
+    
         var qtPergutas = 0;
         for (var i = 0; i < req.body.perguntas.length; i++) {
             //
