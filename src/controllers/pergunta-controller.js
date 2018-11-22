@@ -129,7 +129,7 @@ exports.put = async(req, res, next) => {
             return;
         }         
         var data = await repository.getById(req.params.id);
-
+ 
         if (!data){
             res.status(400).send({
                mensagem: 'Pergunta '+req.params.id+' não encontrada'});            
