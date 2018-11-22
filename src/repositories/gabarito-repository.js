@@ -33,5 +33,6 @@ exports.getByPontuacao = async(pont) => {
         { pontuacao: { $lte: pont } })
                                     .sort({pontuacao: -1})
                                     .limit(1);
+    console.log(res);                                    
     return res;
 } 
