@@ -16,7 +16,7 @@ exports.get = async() => {
 
 exports.pontuacaoById = async(id) => {
     var res = await Pergunta.find({id : id});
-    return await res;
+    return await res.pontuacao;
 }
 
 exports.pontuacao2ById = async(id) => {

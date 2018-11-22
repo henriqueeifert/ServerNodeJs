@@ -4,32 +4,19 @@ const mongoose = require('mongoose');
 const repository = require('../repositories/pergunta-repository');
 
 exports.post = async(req, res, next) => {
+    var qtPontuacao = 0;
     try {   
-        console.log(req.body); 
-
-        var qtPergutas = 0;
+        console.log(req.body);         
         for (var i = 0; i < req.body.perguntas.length; i++) {
             //
-            var data = await repository.pontuacaoById(req.body.perguntas[i]);
-            
-            qtPergutas = qtPergutas + data.pontuacao;
-            //console.log(data);
-            /*
-            var idPergunta = req.body.perguntas[i];
-            if (idPergunta) {
-                qtPergutas = qtPergutas + 1;
-            }
-            console.log(idPergunta);
-            */
-
+            const teste = await repository.getById(req.body.perguntas[i]);
+            qtPontuacao += teste.pontuacao;
         }    
-        // 
-        //console.log(qtPergutas); 
 
         res.status(200).send({
             "mensagem": "Resultado Calculado com Sucesso",
-              "resultado": {"pontuacao": ''+qtPergutas+'',
-                            "resultado": "teste: "+qtPergutas+":",
+              "resultado": {"pontuacao": ""+qtPontuacao+"",
+                            "resultado": "teste"+qtPontuacao+"",
                             "descricao": "desc",
                             "data": "2018-11-20"}
         });
