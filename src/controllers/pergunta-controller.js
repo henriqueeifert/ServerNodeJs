@@ -118,6 +118,16 @@ exports.delete = async(req, res, next) => {
 
 exports.put = async(req, res, next) => {
     try {
+        if (!req.body.texto || req.body.texto.length <= 0){
+            res.status(400).send({
+                mensagem: 'Erro ao alterar Pergunta',
+                erros: {
+                    texto: ['Texto deve ser informado']
+
+                }
+            });            
+            return;
+        }         
         var data = await repository.getById(req.params.id);
 
         if (!data){

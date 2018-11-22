@@ -5,7 +5,26 @@ const repository = require('../repositories/gabarito-repository');
 
 exports.post = async(req, res, next) => {
     try {   
+        if (!req.body.resultado || req.body.resultado.length <= 0){
+            res.status(400).send({
+                mensagem: 'Erro ao incluir Gabarito',
+                erros: {
+                    resultado: ['Resultado deve ser informado']
 
+                }
+            });            
+            return;
+        } 
+        if (!req.body.descricao || req.body.descricao.length <= 0){
+            res.status(400).send({
+                mensagem: 'Erro ao incluir Gabarito',
+                erros: {
+                    descricao: ['Descrição deve ser informada']
+
+                }
+            });            
+            return;
+        }         
         
         let savedGabarito = await repository.create({
             pontuacao: req.body.pontuacao,
@@ -92,6 +111,27 @@ exports.delete = async(req, res, next) => {
 
 exports.put = async(req, res, next) => {
     try {
+        if (!req.body.resultado || req.body.resultado.length <= 0){
+            res.status(400).send({
+                mensagem: 'Erro ao alterar Gabarito',
+                erros: {
+                    resultado: ['Resultado deve ser informado']
+
+                }
+            });            
+            return;
+        } 
+        if (!req.body.descricao || req.body.descricao.length <= 0){
+            res.status(400).send({
+                mensagem: 'Erro ao alterar Gabarito',
+                erros: {
+                    descricao: ['Descrição deve ser informada']
+
+                }
+            });            
+            return;
+        } 
+
         var data = await repository.getById(req.params.id);
 
         if (!data){
