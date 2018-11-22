@@ -27,3 +27,11 @@ exports.update = async(id, data) => {
 exports.delete = async(id) => {
     await Gabarito.findOneAndRemove({id:id});
 }
+
+exports.getByPontuacao = async(pont) => {
+    const  res = await Gabarito.findOne(
+        { pontuacao: { $lte: pont } })
+                                    .sort({pontuacao: -1})
+                                    .limit(1);
+    return res;
+} 
