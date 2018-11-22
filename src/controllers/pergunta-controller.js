@@ -4,7 +4,17 @@ const mongoose = require('mongoose');
 const repository = require('../repositories/pergunta-repository');
 
 exports.post = async(req, res, next) => {
-    try {   
+    try {  
+        if (!req.body.texto || req.body.texto.length <= 0){
+            res.status(400).send({
+                mensagem: 'Erro ao incluir Pergunta',
+                erros: {
+                    texto: ['Texto deve ser informado']
+
+                }
+            });            
+            return;
+        } 
         
         let savedPergunta = await repository.create({
             texto: req.body.texto,

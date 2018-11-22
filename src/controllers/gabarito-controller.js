@@ -4,9 +4,8 @@ const mongoose = require('mongoose');
 const repository = require('../repositories/gabarito-repository');
 
 exports.post = async(req, res, next) => {
-
-
     try {   
+
         
         let savedGabarito = await repository.create({
             pontuacao: req.body.pontuacao,
