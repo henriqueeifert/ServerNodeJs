@@ -10,8 +10,9 @@ exports.post = async(req, res, next) => {
         var qtPergutas = 0;
         for (var i = 0; i < req.body.perguntas.length; i++) {
             //
-            //var data = await repository.pontuacaoById(req.body.perguntas[i]);
+            var data = await repository.pontuacaoById(req.body.perguntas[i]);
             
+            qtPergutas += data.pontuacao;
             //console.log(data);
             /*
             var idPergunta = req.body.perguntas[i];
@@ -27,14 +28,14 @@ exports.post = async(req, res, next) => {
 
         res.status(200).send({
             "mensagem": "Resultado Calculado com Sucesso",
-              "resultado": {"pontuacao": 1,
+              "resultado": {"pontuacao": ''+qtPergutas+'',
                             "resultado": "teste",
                             "descricao": "desc",
                             "data": "2018-11-20"}
         });
 
     }catch (e) {
-        res.status(500).send({
+        res.status(400).send({
             mensagem: 'Falha ao processar sua requisição (CALCULO): '+e
         });
     }
