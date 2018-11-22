@@ -14,7 +14,17 @@ exports.post = async(req, res, next) => {
                 }
             });            
             return;
-        } 
+        }         
+        if (!req.body.pontuacao || req.body.pontuacao.length < 0){
+            res.status(400).send({
+                mensagem: 'Erro ao incluir Pergunta',
+                erros: {
+                    pontuacao: ['Pontuacao deve ser informada']
+
+                }
+            });            
+            return;
+        }
         
         let savedPergunta = await repository.create({
             texto: req.body.texto,
