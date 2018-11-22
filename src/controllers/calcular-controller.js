@@ -8,6 +8,13 @@ const moment = require('moment');
 exports.post = async(req, res, next) => {
     var qtPontuacao = 0;
     try {   
+        if (!req.body.perguntas){
+            res.status(400).send({
+                mensagem: 'Erro ao calcular resultado, json deve possui lista de perguntas'
+            });            
+            return;            
+        }
+    
         console.log(req.body);         
         for (var i = 0; i < req.body.perguntas.length; i++) {
             const perg = await prepository.getById(req.body.perguntas[i]);
