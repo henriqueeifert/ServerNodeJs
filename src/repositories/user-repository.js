@@ -9,9 +9,8 @@ exports.create = async(data) => {
 }
 
 exports.getById = async(id) => {
-    const resp    = await User.find({});
-    var   respStr = JSON.stringify(resp,['id','nome','email','data_nascimento','administrador']);
-    return await JSON.parse(respStr);
+    const  res = await User.findOne({id : id});
+    return res;    
 }
 
 exports.update = async(id, data) => {    
@@ -39,6 +38,7 @@ exports.getByEmail = async(email) => {
     return res;
 }
 exports.get = async() => {
-    const res = await User.find({}, 'nome _id email data_nascimento administrador');
-    return await res;
+    const resp    = await User.find({});
+    var   respStr = JSON.stringify(resp,['id','nome','email','data_nascimento','administrador']);
+    return await JSON.parse(respStr);
 }
