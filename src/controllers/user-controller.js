@@ -1,5 +1,5 @@
 'use strict';
-/*
+
 const moment = require('moment');
 const ValidationContract = require('../validators/fluent-validator');
 const repository = require('../repositories/user-repository');
@@ -7,7 +7,8 @@ const md5 = require('md5');
 const dateFormat = require('dateformat');
 const authService  = require('../services/auth-service');
 const emailService = require('../services/email-service');
-*/
+const mongoose = require('mongoose');
+
 exports.post = async(req, res, next) => {
     console.log('POST CHEGOU'); 
     /*
