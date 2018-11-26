@@ -8,13 +8,19 @@ exports.create = async(data) => {
     return await user.save();
 }
 
-exports.update = async(id, data) => {
+exports.getById = async(id) => {
+    const resp    = await User.find({});
+    var   respStr = JSON.stringify(resp,['id','nome','email','data_nascimento','administrador']);
+    return await JSON.parse(respStr);
+}
+
+exports.update = async(id, data) => {    
     return await User
         .findByIdAndUpdate(id, data);
 }
 
 exports.delete = async(id) => {
-    await User.findOneAndRemove(id);
+    await User.findOneAndRemove({id:id});
 }
 
 exports.authenticate = async(data) => {
@@ -22,12 +28,6 @@ exports.authenticate = async(data) => {
         email: data.email,
         senha: data.senha
     });
-    return res;
-}
-
-exports.getById = async(id) => {
-    //const  res = await User.findById(id);
-    const  res = await User.findOne({_id : id}, 'id nome email data_nascimento administrador');
     return res;
 }
 

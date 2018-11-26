@@ -43,7 +43,8 @@ exports.post = async(req, res, next) => {
             email: req.body.email,
             senha: md5(req.body.senha + global.SALT_KEY),
             administrador: req.body.administrador,
-            data_nascimento: new Date(req.body.data_nascimento)
+            data_nascimento: new Date(req.body.data_nascimento),
+            id: new mongoose.Types.ObjectId
         });
         
         /*
@@ -64,7 +65,7 @@ exports.post = async(req, res, next) => {
             mensagem: 'Usuário cadastrado com sucesso!',
             usuario: 
             {
-                id: savedUser._id,
+                id: savedUser.id,
                 nome: savedUser.nome,
                 email: savedUser.email,
                 administrador: savedUser.administrador,
@@ -94,10 +95,10 @@ exports.authenticate = async(req, res, next) => {
         }
 
         const token = await authService.generateToken({
-            id:            user._id,
-            email:         user.email,
-            nome:          user.nome,
-            administrador: user.administrador
+            id:            user.id
+            //email:         user.email,
+            //nome:          user.nome,
+            //administrador: user.administrador
         });        
         
         res.status(201).send({
@@ -129,10 +130,10 @@ exports.refreshToken = async(req, res, next) => {
         }
 
         const tokenData = await authService.generateToken({
-            id:            user._id,
-            email:         user.email,
-            nome:          user.nome,
-            administrador: user.administrador
+            id:            user.id
+            //email:         user.email,
+            //nome:          user.nome,
+            //administrador: user.administrador
         });        
         
         res.status(201).send({

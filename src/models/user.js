@@ -25,7 +25,10 @@ const schema = new Schema({
         type: Boolean,
         required: true,
         default: false
-    }
+    },
+    id: {
+        type: mongoose.Types.ObjectId        
+    }     
 });
 
 module.exports = mongoose.model('User', schema);
