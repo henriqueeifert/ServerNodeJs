@@ -5,6 +5,7 @@ const router = express.Router();
 const controller  = require('../controllers/user-controller');
 const authService = require('../services/auth-service');
 
+console.log('ROUTE OK');
 router.get('/',controller.get);
 router.get('/:id',controller.getById);
 router.post('/',controller.post);

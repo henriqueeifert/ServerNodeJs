@@ -126,7 +126,7 @@ exports.put = async(req, res, next) => {
 
                 }
             });            
-            return;
+            return; 
         }         
         var data = await repository.getById(req.params.id);
  
@@ -139,7 +139,7 @@ exports.put = async(req, res, next) => {
                 {   pontuacao: req.body.pontuacao,
                     texto: req.body.texto});
 
-        res.status(200).send({
+        res.status(200).send({ 
             mensagem: 'Pergunta atualizada com sucesso!',
             pergunta: 
             {

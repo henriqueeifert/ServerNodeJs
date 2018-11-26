@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 const moment = require('moment');
 const ValidationContract = require('../validators/fluent-validator');
 const repository = require('../repositories/user-repository');
@@ -7,8 +7,11 @@ const md5 = require('md5');
 const dateFormat = require('dateformat');
 const authService  = require('../services/auth-service');
 const emailService = require('../services/email-service');
-
+*/
 exports.post = async(req, res, next) => {
+    console.log('POST CHEGOU'); 
+    /*
+
     let contract = new ValidationContract();
 
     contract.hasMinLen(req.body.nome, 3, 'O nome do usuário deve conter pelo menos 3 caracteres');
@@ -19,13 +22,14 @@ exports.post = async(req, res, next) => {
     contract.isRequired(req.body.senha,'Senha requerido');
     contract.isRequired(req.body.data_nascimento,'Data Nascimento requerido');
     contract.isRequired(req.body.administrador,'Administrador requerido');
-
+    */
     //
     //console.log(''+req.body.data_nascimento);
     //
     //contract.hasMinLen(req.body.data_nascimento, 10, 'A data de nascimento deve conter pelo menos 10 caracteres');
     //var data_henrique = dateFormat(req.body.data_nascimento, "yyyy-mm-dd h:MM:ss");
     // Se os dados forem inválidos
+    /*
     if (!contract.isValid()) {
         res.status(400).send({
             mensagem: 'Erro ao incluir o usuário!',
@@ -36,8 +40,8 @@ exports.post = async(req, res, next) => {
         }});               
         return;
     }
-    try {   
-        
+    */
+    try {           
         let savedUser = await repository.create({
             nome: req.body.nome,
             email: req.body.email,
