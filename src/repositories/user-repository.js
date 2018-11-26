@@ -7,7 +7,7 @@ exports.create = async(data) => {
     var user = new User(data);
     return await user.save();
 }
-
+    
 exports.getById = async(id) => {
     const  res = await User.findOne({id : id});
     return res;    
