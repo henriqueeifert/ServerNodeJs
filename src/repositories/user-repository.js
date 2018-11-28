@@ -4,10 +4,11 @@ const mongoose = require('mongoose');
 const User     = mongoose.model('User');
 
 exports.create = async(data) => {
+    console.log('CREATE USER');
     var user = new User(data);
     return await user.save();
 }
-    
+
 exports.getById = async(id) => {
     const  res = await User.findOne({id : id});
     return res;    
