@@ -9,7 +9,7 @@ exports.create = async(data) => {
 }
 
 exports.getById = async(id) => {
-    const  res = await User.findOne({id : id});
+    const  res = await User.find({id : id});
     return res;    
 }
 
