@@ -9,8 +9,9 @@ exports.create = async(data) => {
 }
 
 exports.getById = async(id) => {
-    const  res = await User.find({id : id});
-    return res;    
+    const resp    = await User.find({id : id});
+    //var   respStr = JSON.stringify(resp,['id','nome','email','data_nascimento','administrador']);
+    return resp;//await JSON.parse(respStr);    
 }
 
 exports.update = async(id, data) => {    

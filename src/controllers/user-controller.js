@@ -247,7 +247,7 @@ exports.getById = async(req, res, next) => {
             {
                 usuario:                 
                 {
-                    id: data._id,
+                    id: data.id,
                     nome: data.nome,
                     email: data.email,
                     data_nascimento: moment(data.data_nascimento).format('YYYY-MM-DD'),
