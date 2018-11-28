@@ -160,6 +160,8 @@ exports.put = async(req, res, next) => {
      //   const data  = await authService.decodeToken(token);
         //
         var data = await repository.getById(req.params.id);
+        console.log('ID: '+req.params.id+' _ID: '+data._id+' email: '+data.email);
+        console.log(data);
 
         if (!data){
             res.status(400).send({

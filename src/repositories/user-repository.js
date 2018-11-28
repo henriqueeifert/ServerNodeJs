@@ -9,7 +9,7 @@ exports.create = async(data) => {
 }
 
 exports.getById = async(id) => {
-    const resp    = await User.find({id : id});
+    const resp    = await User.findOne({id : id});
     //var   respStr = JSON.stringify(resp,['id','nome','email','data_nascimento','administrador']);
     return resp;//await JSON.parse(respStr);    
 }
