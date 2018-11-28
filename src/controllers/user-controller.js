@@ -174,7 +174,7 @@ exports.put = async(req, res, next) => {
                     data_nascimento: new Date(req.body.data_nascimento),
                     senha: md5(req.body.senha + global.SALT_KEY),
                     administrador: req.body.administrador});
-        }else
+        }else 
         {
             const savedUser = await repository.update(req.params.id, 
                 {   nome: req.body.nome,
