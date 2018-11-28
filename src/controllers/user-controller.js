@@ -167,7 +167,7 @@ exports.put = async(req, res, next) => {
             return;
         }        
         if (req.body.senha){
-            const savedUser = await repository.update(data.id, 
+            const savedUser = await repository.update(data._id, 
                 {   nome: req.body.nome,
                     email: req.body.email,
                     data_nascimento: new Date(req.body.data_nascimento),
@@ -175,7 +175,7 @@ exports.put = async(req, res, next) => {
                     administrador: req.body.administrador});
         }else 
         {
-            const savedUser = await repository.update(req.params.id, 
+            const savedUser = await repository.update(req.params._id, 
                 {   nome: req.body.nome,
                     email: req.body.email,  
                     data_nascimento: new Date(req.body.data_nascimento),                  
