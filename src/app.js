@@ -17,11 +17,12 @@ const Pergunta = require('./models/pergunta');
 const Gabarito = require('./models/gabarito');
 
 //carrega rotas
-const indexRoute = require('./routes/index-route');
-const userRoute  = require('./routes/user-route');
+const indexRoute     = require('./routes/index-route');
+const userRoute      = require('./routes/user-route');
 const perguntaRoute  = require('./routes/pergunta-route');
 const gabaritoRoute  = require('./routes/gabarito-route');
 const calcularRoute  = require('./routes/calcular-route');
+const loginRoute     = require('./routes/login-route');
 
 app.use(bodyParser.json({
     limit: '1mb' }));
@@ -55,5 +56,7 @@ app.use('/api/pergunta', perguntaRoute);
 app.use('/api/gabarito', gabaritoRoute);
 app.use('/api/questionario/perguntas', perguntaRoute);
 app.use('/api/questionario/calcular', calcularRoute);
+app.use('/api/autenticacao', loginRoute);
+
 
 module.exports = app; 
