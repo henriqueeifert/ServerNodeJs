@@ -27,10 +27,14 @@ exports.authenticate = async(req, res, next) => {
         });        
         
         res.status(201).send({
-            token: token,
-            data:{
+            mensagem: "Login realizado com sucesso",
+            usuario:{
+                id:    user.id,
                 email: user.email,
-                nome:  user.nome
+                nome:  user.nome,
+                administrador: user.administrador,
+                data_nascimento: user.data_nascimento,
+                token: token
             }
         });
     } catch (e) {
