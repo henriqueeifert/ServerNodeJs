@@ -14,7 +14,7 @@ exports.authenticate = async(req, res, next) => {
             });            
             return;            
         }        
-        if (!req.body.usuario.email || !req.body.usuario.usuario.senha){
+        if (!req.body.usuario.email || !req.body.usuario.senha){
             res.status(400).send({
                 mensagem: 'Favor informar e-mail e senha'});            
             return;
