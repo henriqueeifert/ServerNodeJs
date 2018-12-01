@@ -7,23 +7,25 @@ const authService  = require('../services/auth-service');
 const mongoose = require('mongoose');
 
 exports.authenticate = async(req, res, next) => {
-    try { 
+    try {
+        if (!req.body.email || !req.body.senha){
+            res.status(400).send({
+                mensagem: 'Favor informar e-mail e senha'});            
+            return;
+        }
         const user = await repository.authenticate({
             email: req.body.email,
             senha: md5(req.body.senha + global.SALT_KEY)
         });
         
         if (!user){
-            res.status(404).send({
+            res.status(400).send({
                 mensagem: 'Usuário ou senha inválidos'});            
             return;
         }
 
         const token = await authService.generateToken({
             id:            user.id
-            //email:         user.email,
-            //nome:          user.nome,
-            //administrador: user.administrador
         });        
         
         res.status(201).send({
