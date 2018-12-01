@@ -84,6 +84,42 @@ exports.refreshToken = async(req, res, next) => {
     }
 };
 
+exports.decodeToken = async(req, res, next) => {
+
+    try {
+        const token = req.body.token || req.query.token || req.headers['x-access-token'];  
+        if (!token) {
+            res.status(400).send({
+                mensagem: 'Token deve ser informado: '+token});            
+             return;
+ 
+        }
+        const data  = await authService.decodeToken(token);
+
+        const user = await repository.getById(data.id);
+        
+        if (!user){
+            res.status(400).send({
+               mensagem: 'Usuário não encontrado para o token '+token});            
+            return;
+        }
+        
+        res.status(201).send({
+            usuario:{
+                id:    user.id,
+                email: user.email,
+                nome:  user.nome,
+                administrador: user.administrador,
+                data_nascimento: moment(user.data_nascimento).format('YYYY-MM-DD'),
+                token: token
+            }});
+    } catch (e) {
+        res.status(500).send({
+            mensagem: 'Falha ao processar sua requisição: '+e
+        });
+    }    
+}    
+
 exports.get = async(req, res, next) => {
     try {
         var user = await repository.get();
