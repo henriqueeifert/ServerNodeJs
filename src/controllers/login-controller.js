@@ -88,9 +88,10 @@ exports.decodeToken = async(req, res, next) => {
 
     try {
         const token = req.body.token || req.query.token || req.headers['x-access-token'];  
+
         if (!token) {
             res.status(400).send({
-                mensagem: 'Token deve ser informado: '+token});            
+                mensagem: 'Token deve ser informado: '+req.body.token});            
              return;
  
         }
