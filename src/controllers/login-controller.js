@@ -21,7 +21,7 @@ exports.authenticate = async(req, res, next) => {
         }
         const user = await repository.authenticate({
             email: req.body.usuario.email,
-            senha: md5(req.body.usurio.senha + global.SALT_KEY)
+            senha: md5(req.body.usuario.senha + global.SALT_KEY)
         });
         
         if (!user){
