@@ -20,7 +20,7 @@ exports.authenticate = async(req, res, next) => {
         
         if (!user){
             res.status(400).send({
-                mensagem: 'Usuário ou senha inválidos'});            
+                mensagem: 'Usuário ou senha inválido'});            
             return;
         }
 
@@ -35,7 +35,7 @@ exports.authenticate = async(req, res, next) => {
                 email: user.email,
                 nome:  user.nome,
                 administrador: user.administrador,
-                data_nascimento: user.data_nascimento,
+                data_nascimento: moment(user.data_nascimento).format('YYYY-MM-DD'),
                 token: token
             }
         });
