@@ -34,8 +34,8 @@ exports.authenticate = async(data) => {
 exports.getByEmail = async(email) => {
     const res = await User
         .findOne({
-            email: email,
-        }, 'id');
+            email: email
+        });
     return res;
 }
 exports.get = async() => {

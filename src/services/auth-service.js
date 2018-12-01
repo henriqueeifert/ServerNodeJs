@@ -6,7 +6,11 @@ exports.generateToken = async (data) => {
 }
 
 exports.decodeToken = async (token) => {
+    try{
     var data = await jwt.verify(token, global.SALT_KEY);
+        }catch (e) {
+            return;     
+        }      
     return data;
 }
 

@@ -87,6 +87,11 @@ exports.refreshToken = async(req, res, next) => {
 exports.decodeToken = async(req, res, next) => {
 
     try {
+        console.log('teste'+req.body);
+        console.log('body: '+req.body.token);
+        console.log('query: '+req.query.token);
+        console.log('headers: '+req.headers['x-access-token']);
+        //
         const token = req.body.token || req.query.token || req.headers['x-access-token'];  
 
         if (!token) {
@@ -95,9 +100,15 @@ exports.decodeToken = async(req, res, next) => {
              return;
  
         }
-        const data  = await authService.decodeToken(token);
 
-        const user = await repository.getById(data.id);
+        const data  = await authService.decodeToken(token);
+        if(!data){
+            res.status(401).send({
+                mensagem: 'token inválido, favor verificar'});            
+             return;
+ 
+        }
+        const user = await repository.getByEmail(data.email);
         
         if (!user){
             res.status(400).send({
