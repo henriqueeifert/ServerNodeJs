@@ -31,7 +31,7 @@ exports.authenticate = async(req, res, next) => {
         }
 
         const token = await authService.generateToken({
-            id:            user.id
+            email:            user.email
         });        
         
         res.status(201).send({
@@ -67,7 +67,7 @@ exports.refreshToken = async(req, res, next) => {
         }
 
         const tokenData = await authService.generateToken({
-            id:            user.id
+            email:            user.email
         });        
         
         res.status(201).send({
@@ -91,7 +91,7 @@ exports.decodeToken = async(req, res, next) => {
 
         if (!token) {
             res.status(400).send({
-                mensagem: 'Token deve ser informado: '+req.body.token});            
+                mensagem: 'Token deve ser informado: '+token});            
              return;
  
         }
