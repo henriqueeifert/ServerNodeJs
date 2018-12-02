@@ -7,7 +7,8 @@ exports.create = async(data) => {
     var token = new Token(data);
     return await token.save();
 }
+
 exports.getByToken = async(token) => {
-    const  res = await Token.findOne({token : token});
+    const  res = await Token.find({token: token});
     return res;
 }

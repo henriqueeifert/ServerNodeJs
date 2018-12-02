@@ -98,7 +98,14 @@ exports.decodeToken = async(req, res, next) => {
                 mensagem: 'Token deve ser informado: '+token});            
              return; 
         }
+        var tokenInvalido =  repositoryTokenInvalido.getByToken(token);
 
+        if (tokenInvalido){
+            res.status(403).json({
+                message: 'Token Inválido, sessão logout'
+            });
+            return;
+        }
         const data  = await authService.decodeToken(token);
         if(!data){
             res.status(401).send({

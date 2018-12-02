@@ -15,7 +15,7 @@ var conect = mongoose.connect(config.connectionString);
 const User     = require('./models/user');
 const Pergunta = require('./models/pergunta');
 const Gabarito = require('./models/gabarito');
-const Token = require('./models/token');
+const Token    = require('./models/token');
 
 //carrega rotas
 const indexRoute     = require('./routes/index-route');

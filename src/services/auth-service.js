@@ -1,6 +1,9 @@
 'use strict';
 const jwt = require('jsonwebtoken');
 
+const mongoose = require('mongoose');
+const repository = require('../repositories/tokens-invalido-repository');
+
 exports.generateToken = async (data) => {
     return jwt.sign(data, global.SALT_KEY, { expiresIn: '1d' });
 }
@@ -31,7 +34,15 @@ exports.authorize = function (req, res, next) {
                 res.status(403).json({
                     message: 'Token Inválido'
                 });
-            } else {
+            } else {                
+                var tokenInvalido =  repository.getByToken(token);
+
+                if (tokenInvalido){
+                    res.status(403).json({
+                        message: 'Token Inválido, sessão logout'
+                    });
+                    return;
+                }        
                 next();
             }
         });
