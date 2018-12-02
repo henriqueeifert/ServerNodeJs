@@ -5,7 +5,7 @@ const router = express.Router();
 const controller  = require('../controllers/pergunta-controller');
 const authService = require('../services/auth-service');
 
-router.get('/',      authService.authorize, controller.get);
+router.get('/',      controller.get);
 router.post('/',     authService.isAdmin,   controller.post);
 router.get('/:id',   authService.authorize, controller.getById);
 router.put('/:id',   authService.isAdmin,   controller.put);
