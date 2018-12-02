@@ -141,7 +141,6 @@ exports.put = async(req, res, next) => {
                 mensagem: 'Erro ao incluir Resultado',
                 erros: {
                     pontuacao: ['Pontuacao deve ser informada']
-
                 }
             });            
             return;

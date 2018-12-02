@@ -10,37 +10,56 @@ const authService  = require('../services/auth-service');
 const mongoose = require('mongoose');
 
 exports.post = async(req, res, next) => {
-    /*
-
-    let contract = new ValidationContract();
-
-    contract.hasMinLen(req.body.nome, 3, 'O nome do usuário deve conter pelo menos 3 caracteres');
-    contract.isEmail(req.body.email, 'O e-mail do usuário informado está inválido');
-    contract.hasMinLen(req.body.senha, 6, 'A Senha deve conter pelo menos 6 caracteres');
-    contract.isRequired(req.body.nome,'Nome requerido');
-    contract.isRequired(req.body.email,'Email requerido');
-    contract.isRequired(req.body.senha,'Senha requerido');
-    contract.isRequired(req.body.data_nascimento,'Data Nascimento requerido');
-    contract.isRequired(req.body.administrador,'Administrador requerido');
-    */
-    //
-    //console.log(''+req.body.data_nascimento);
-    //
-    //contract.hasMinLen(req.body.data_nascimento, 10, 'A data de nascimento deve conter pelo menos 10 caracteres');
-    //var data_henrique = dateFormat(req.body.data_nascimento, "yyyy-mm-dd h:MM:ss");
-    // Se os dados forem inválidos
-    /*
-    if (!contract.isValid()) {
+    if (!req.body.nome || req.body.nome.length <= 3){
         res.status(400).send({
-            mensagem: 'Erro ao incluir o usuário!',
+            mensagem: 'Erro ao incluir User',
             erros: {
-                nome: [
-                    'Informações inválidas'
-            ]                    
-        }});               
+                nome: ['Nome deve ser informado ou possuir mais de 3 caracteres']
+            }
+        });            
+        return;
+    }         
+    if (!req.body.senha || req.body.senha.length <= 5){
+        res.status(400).send({
+            mensagem: 'Erro ao incluir user',
+            erros: {
+                senha: ['Senha deve ser informada ou possuir mais de 5 caracteres']
+            }
+        });            
+        return;
+    }                         
+    if (!req.body.email || req.body.email.length <= 0){
+
+        res.status(400).send({
+            mensagem: 'Erro ao incluir User',
+            erros: {
+                id_usuario: ['E-mail deve ser informado']
+            }
+        });            
         return;
     }
-    */
+    var reg = new RegExp(/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
+
+    if (!reg.test(req.body.email)){
+    res.status(400).send({
+        mensagem: 'Erro ao incluir User',
+        erros: {
+            email: ['E-mail deve possuir formato válido']
+        }
+    });            
+      return;
+    }
+    if (!req.body.data_nascimento || req.body.data_nascimento.length < 10){
+
+        res.status(400).send({
+            mensagem: 'Erro ao incluir User',
+            erros: {
+                data_nascimento: ['Data de nascimento deve ser informada']
+            }
+        });            
+        return;
+    }
+
     try {           
         let savedUser = await repository.create({
             nome: req.body.nome,
@@ -51,18 +70,6 @@ exports.post = async(req, res, next) => {
             id: new mongoose.Types.ObjectId
         });
         
-        /*
-        try{
-            console.log('email para: '+req.body.email);  
-            emailService.send(req.body.email, 
-                              'Bem vindo ao e-mail de teste',                              
-                              global.EMAIL_TMPL.replace('{0}',req.body.nome));
-        
-        } catch (e) {
-            console.log('Erro envio de e-mail: '+e);
-        }
-*/
-
         let dateStr = moment(savedUser.data_nascimento).format('YYYY-MM-DD');
         res.status(200).send({
 
@@ -74,7 +81,6 @@ exports.post = async(req, res, next) => {
                 email: savedUser.email,
                 administrador: savedUser.administrador,
                 data_nascimento:  dateStr
-                //)new Date(savedUser.data_nascimento
             }            
         });
     } catch (e) {
@@ -100,9 +106,6 @@ exports.authenticate = async(req, res, next) => {
 
         const token = await authService.generateToken({
             id:            user.id
-            //email:         user.email,
-            //nome:          user.nome,
-            //administrador: user.administrador
         });        
         
         res.status(201).send({
@@ -135,9 +138,6 @@ exports.refreshToken = async(req, res, next) => {
 
         const tokenData = await authService.generateToken({
             id:            user.id
-            //email:         user.email,
-            //nome:          user.nome,
-            //administrador: user.administrador
         });        
         
         res.status(201).send({
@@ -156,6 +156,57 @@ exports.refreshToken = async(req, res, next) => {
 
 exports.put = async(req, res, next) => {
     try {
+
+        if (!req.body.nome || req.body.nome.length <= 3){
+            res.status(400).send({
+                mensagem: 'Erro ao incluir User',
+                erros: {
+                    nome: ['Nome deve ser informado ou possuir mais de 3 caracteres']
+                }
+            });            
+            return;
+        }         
+        if (!req.body.senha || req.body.senha.length <= 5){
+            res.status(400).send({
+                mensagem: 'Erro ao incluir user',
+                erros: {
+                    senha: ['Senha deve ser informada ou possuir mais de 5 caracteres']
+                }
+            });            
+            return;
+        }                         
+        if (!req.body.email || req.body.email.length <= 0){
+    
+            res.status(400).send({
+                mensagem: 'Erro ao incluir User',
+                erros: {
+                    id_usuario: ['E-mail deve ser informado']
+                }
+            });            
+            return;
+        }
+        var reg = new RegExp(/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
+    
+        if (!reg.test(req.body.email)){
+        res.status(400).send({
+            mensagem: 'Erro ao incluir User',
+            erros: {
+                email: ['E-mail deve possuir formato válido']
+            }
+        });            
+          return;
+        }
+        if (!req.body.data_nascimento || req.body.data_nascimento.length < 10){
+    
+            res.status(400).send({
+                mensagem: 'Erro ao incluir User',
+                erros: {
+                    data_nascimento: ['Data de nascimento deve ser informada']
+                }
+            });            
+            return;
+        }
+                
      //   const token = req.body.token || req.query.token || req.headers['x-access-token'];  
      //   const data  = await authService.decodeToken(token);
         //
@@ -192,7 +243,6 @@ exports.put = async(req, res, next) => {
                 email: req.body.email,
                 administrador: req.body.administrador,
                 data_nascimento: moment(req.body.data_nascimento).format('YYYY-MM-DD')
-                //req.body.data_nascimento
         }
         });
     }catch (e){
