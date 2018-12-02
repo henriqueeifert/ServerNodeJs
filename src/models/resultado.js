@@ -12,4 +12,4 @@ const schema = new Schema({
     id_usuario: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true} 
 });
 
-module.exports = mongoose.model('Resposta', schema);
+module.exports = mongoose.model('Resultado', schema);

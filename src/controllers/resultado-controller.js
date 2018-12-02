@@ -1,13 +1,14 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const repository = require('../repositories/resposta-repository');
+const repository = require('../repositories/resultado-repository');
+const moment = require('moment');
 
 exports.post = async(req, res, next) => {
     try {  
         if (req.body.pontuacao < 0){
             res.status(400).send({
-                mensagem: 'Erro ao incluir Resposta',
+                mensagem: 'Erro ao incluir Resultado',
                 erros: {
                     pontuacao: ['Pontuacao deve ser informada']
 
@@ -17,7 +18,7 @@ exports.post = async(req, res, next) => {
         }
         if (!req.body.resultado || req.body.resultado.length <= 0){
             res.status(400).send({
-                mensagem: 'Erro ao incluir Resposta',
+                mensagem: 'Erro ao incluir Resultado',
                 erros: {
                     resultado: ['Resultado deve ser informado']
                 }
@@ -26,7 +27,7 @@ exports.post = async(req, res, next) => {
         }         
         if (!req.body.descricao || req.body.descricao.length <= 0){
             res.status(400).send({
-                mensagem: 'Erro ao incluir Resposta',
+                mensagem: 'Erro ao incluir Resultado',
                 erros: {
                     descricao: ['Descrição deve ser informada']
                 }
@@ -35,7 +36,7 @@ exports.post = async(req, res, next) => {
         }                         
         if (!req.body.id_usuario || req.body.id_usuario.length <= 0){
             res.status(400).send({
-                mensagem: 'Erro ao incluir Resposta',
+                mensagem: 'Erro ao incluir Resultado',
                 erros: {
                     id_usuario: ['Usuário deve ser informado']
                 }
@@ -137,7 +138,7 @@ exports.put = async(req, res, next) => {
     try {
         if (req.body.pontuacao < 0){
             res.status(400).send({
-                mensagem: 'Erro ao incluir Resposta',
+                mensagem: 'Erro ao incluir Resultado',
                 erros: {
                     pontuacao: ['Pontuacao deve ser informada']
 
@@ -147,7 +148,7 @@ exports.put = async(req, res, next) => {
         }
         if (!req.body.resultado || req.body.resultado.length <= 0){
             res.status(400).send({
-                mensagem: 'Erro ao incluir Resposta',
+                mensagem: 'Erro ao incluir Resultado',
                 erros: {
                     resultado: ['Resultado deve ser informado']
                 }
@@ -156,7 +157,7 @@ exports.put = async(req, res, next) => {
         }         
         if (!req.body.descricao || req.body.descricao.length <= 0){
             res.status(400).send({
-                mensagem: 'Erro ao incluir Resposta',
+                mensagem: 'Erro ao incluir Resultado',
                 erros: {
                     descricao: ['Descrição deve ser informada']
                 }
