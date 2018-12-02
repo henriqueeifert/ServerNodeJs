@@ -2,6 +2,7 @@
 
 const moment = require('moment');
 const repository = require('../repositories/user-repository');
+const repositoryTokenInvalido = require('../repositories/tokens-invalido-repository');
 const md5 = require('md5');
 const authService  = require('../services/auth-service');
 const mongoose = require('mongoose');
@@ -89,16 +90,13 @@ exports.decodeToken = async(req, res, next) => {
     try {
         console.log('teste'+req.body);
         console.log('body: '+req.body.token);
-        console.log('query: '+req.query.token);
-        console.log('headers: '+req.headers['x-access-token']);
         //
         const token = req.body.token || req.query.token || req.headers['x-access-token'];  
 
         if (!token) {
             res.status(400).send({
                 mensagem: 'Token deve ser informado: '+token});            
-             return;
- 
+             return; 
         }
 
         const data  = await authService.decodeToken(token);
@@ -111,12 +109,12 @@ exports.decodeToken = async(req, res, next) => {
         const user = await repository.getByEmail(data.email);
         
         if (!user){
-            res.status(400).send({
+            res.status(401).send({
                mensagem: 'Usuário não encontrado para o token '+token});            
             return;
         }
         
-        res.status(201).send({
+        res.status(200).send({
             usuario:{
                 id:    user.id,
                 email: user.email,
@@ -134,17 +132,29 @@ exports.decodeToken = async(req, res, next) => {
 
 exports.get = async(req, res, next) => {
     try {
-        var user = await repository.get();
-        
-        res.status(200).send(
-            {
-                usuarios: user                        
+        console.log('teste'+req.body);
+        console.log('body: '+req.body.token);
+        //
+        const token = req.body.token || req.query.token || req.headers['x-access-token'];  
+
+        if (!token) {
+            res.status(400).send({
+                mensagem: 'Token deve ser informado: '+token});            
+             return; 
+        }
+        let savedToken = await repositoryTokenInvalido.create({
+            token: token
+             });
+
+        res.status(200).send({
+            mensagem: 'Logout realizado com sucesso'
         });
+
     } catch (e) {
         res.status(500).send({
             mensagem: 'Falha ao processar sua requisição: '+e
         });
-    }
+    }  
 }
 
 exports.getById = async(req, res, next) => {    

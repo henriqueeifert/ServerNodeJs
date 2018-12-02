@@ -5,6 +5,10 @@ exports.generateToken = async (data) => {
     return jwt.sign(data, global.SALT_KEY, { expiresIn: '1d' });
 }
 
+exports.generateTokenLogout = async (data) => {
+    return jwt.sign(data, global.SALT_KEY, { expiresIn: 1 });
+}
+
 exports.decodeToken = async (token) => {
     try{
     var data = await jwt.verify(token, global.SALT_KEY);
