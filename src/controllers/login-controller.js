@@ -56,7 +56,7 @@ exports.authenticate = async(req, res, next) => {
 exports.refreshToken = async(req, res, next) => {
     try {   
 
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];  
+        const token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'].substr(7);  
         const data  = await authService.decodeToken(token);
 
         const user = await repository.getById(data.id);
@@ -88,10 +88,8 @@ exports.refreshToken = async(req, res, next) => {
 exports.decodeToken = async(req, res, next) => {
 
     try {
-        console.log('teste'+req.body);
-        console.log('body: '+req.body.token);
-        //
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];  
+
+        const token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'].substr(7);  
 
         if (!token) {
             res.status(400).send({

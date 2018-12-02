@@ -60,6 +60,7 @@ app.use('/api/gabarito', gabaritoRoute);
 app.use('/api/questionario/perguntas', perguntaRoute);
 app.use('/api/questionario/calcular', calcularRoute);
 app.use('/api/autenticacao', loginRoute);
+app.use('/api/questionario/resultado',respostaRoute);
 app.use('/api/resultado',respostaRoute);
 
 
