@@ -206,7 +206,7 @@ exports.put = async(req, res, next) => {
             });            
             return;
         }
-        var data = await repository.getById(req.params.id);
+        var data = await repository.getById(req.params.id || req.body.id);
         console.log('ID: '+req.params.id+' _ID: '+data._id+' email: '+data.email);
         console.log(data);
 
