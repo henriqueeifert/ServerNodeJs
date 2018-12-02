@@ -10,7 +10,7 @@ exports.create = async(data) => {
 //
 exports.get = async() => {
     const resp    = await Resultado.find({});
-    var   respStr = JSON.stringify(resp,['id','texto','pontuacao']);
+    var   respStr = JSON.stringify(resp,['id','resultado','pontuacao', 'descricao', 'data', 'id_usuario']);
     return await JSON.parse(respStr);
 }
 exports.getById = async(id) => {

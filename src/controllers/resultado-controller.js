@@ -58,7 +58,7 @@ exports.post = async(req, res, next) => {
         mensagem: 'Pergunta cadastrada com sucesso!',
         resultado: 
         {
-            id: savedPergunta.id,
+            id:         savedPergunta.id,
             pontuacao:  savedPergunta.pontuacao,
             resultado:  savedPergunta.resultado,
             descricao:  savedPergunta.descricao,            
