@@ -140,7 +140,7 @@ exports.get = async(req, res, next) => {
         console.log('teste'+req.body);
         console.log('body: '+req.body.token);
         //
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];  
+        const token = req.body.token || req.query.token || req.headers['x-access-token'] ||  req.headers['authorization'].substr(7);  
 
         if (!token) {
             res.status(400).send({
