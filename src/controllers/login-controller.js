@@ -9,20 +9,14 @@ const mongoose = require('mongoose');
 
 exports.authenticate = async(req, res, next) => {
     try {
-        if (!req.body.usuario){
-            res.status(400).send({
-                mensagem: 'Erro, json deve possuir objeto usuario'
-            });            
-            return;            
-        }        
-        if (!req.body.usuario.email || !req.body.usuario.senha){
+        if (!req.body.email || !req.body.senha){
             res.status(400).send({
                 mensagem: 'Favor informar e-mail e senha'});            
             return;
         }
         const user = await repository.authenticate({
-            email: req.body.usuario.email,
-            senha: md5(req.body.usuario.senha + global.SALT_KEY)
+            email: req.body.email,
+            senha: md5(req.body.senha + global.SALT_KEY)
         });
         
         if (!user){
@@ -137,8 +131,6 @@ exports.decodeToken = async(req, res, next) => {
 
 exports.get = async(req, res, next) => {
     try {
-        console.log('teste'+req.body);
-        console.log('body: '+req.body.token);
         //
         const token = req.body.token || req.query.token || req.headers['x-access-token'] ||  req.headers['authorization'].substr(7);  
 

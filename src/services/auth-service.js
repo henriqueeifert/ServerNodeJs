@@ -34,10 +34,12 @@ exports.authorize = function (req, res, next) {
                 res.status(403).json({
                     message: 'Token Inválido'
                 });
-            } else {                
-                var tokenInvalido =  repository.getByToken(token);
+            } else {          
+                console.log('token: '+token);      
+                var tokenInvalido = await repository.getByToken(token);
+                console.log('tokenInvalido: '+JSON.stringify(tokenInvalido));
 
-                if (tokenInvalido){
+                if (tokenInvalido.token){
                     res.status(403).json({
                         message: 'Token Inválido, sessão logout'
                     });

@@ -9,6 +9,6 @@ exports.create = async(data) => {
 }
 
 exports.getByToken = async(token) => {
-    const  res = await Token.find({token: token});
+    const  res = await Token.findOne({token: token},'token');
     return res;
 }
