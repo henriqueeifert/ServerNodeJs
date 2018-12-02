@@ -125,7 +125,7 @@ exports.authenticate = async(req, res, next) => {
 exports.refreshToken = async(req, res, next) => {
     try {   
 
-        const token = req.body.token || req.query.token || req.headers['x-access-token'] req.headers['authorization'].substr(7);  
+        const token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'].substr(7);  
         const data  = await authService.decodeToken(token);
 
         const user = await repository.getById(data.id);
