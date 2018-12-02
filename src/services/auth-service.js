@@ -22,7 +22,7 @@ exports.decodeToken = async (token) => {
 }
 
 exports.authorize =  function (req, res, next) {
-    var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'].substr(7);
+    var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'];
     var tokenInvalido = repository.getByToken(token);
     if (!token) {
         res.status(401).json({
@@ -53,7 +53,7 @@ exports.authorize =  function (req, res, next) {
 exports.isAdmin = function (req, res, next) {
     var tokenAuthorization = req.headers['authorization'];
     console.log('tokenAuthorization: '+tokenAuthorization);
-    const token = req.body.token || req.query.token || req.headers['x-access-token'] || tokenAuthorization.substr(7); 
+    const token = req.body.token || req.query.token || req.headers['x-access-token'] || tokenAuthorization; 
     const data  = jwt.verify(token, global.SALT_KEY); 
 
     if (!token) {
