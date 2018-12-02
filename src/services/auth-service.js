@@ -21,14 +21,14 @@ exports.decodeToken = async (token) => {
     return data;
 }
 
-exports.authorize = function (req, res, next) {
+exports.authorize =  function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'].substr(7);
-
+    var tokenInvalido = repository.getByToken(token);
     if (!token) {
         res.status(401).json({
             message: 'Acesso Restrito (Token não informado)'
         });
-    } else {
+    } else {        
         jwt.verify(token, global.SALT_KEY, function (error, decoded) {
             if (error) {
                 res.status(403).json({
@@ -36,15 +36,15 @@ exports.authorize = function (req, res, next) {
                 });
             } else {          
                 console.log('token: '+token);      
-                var tokenInvalido = await repository.getByToken(token);
                 console.log('tokenInvalido: '+JSON.stringify(tokenInvalido));
-
+                /*
                 if (tokenInvalido.token){
                     res.status(403).json({
                         message: 'Token Inválido, sessão logout'
                     });
                     return;
-                }        
+                } 
+                */       
                 next();
             }
         });

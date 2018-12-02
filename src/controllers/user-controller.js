@@ -206,10 +206,6 @@ exports.put = async(req, res, next) => {
             });            
             return;
         }
-
-     //   const token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'].substr(7);  
-     //   const data  = await authService.decodeToken(token);
-        //
         var data = await repository.getById(req.params.id);
         console.log('ID: '+req.params.id+' _ID: '+data._id+' email: '+data.email);
         console.log(data);
