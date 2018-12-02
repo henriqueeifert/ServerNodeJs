@@ -16,6 +16,7 @@ const User     = require('./models/user');
 const Pergunta = require('./models/pergunta');
 const Gabarito = require('./models/gabarito');
 const Token    = require('./models/token');
+const Resposta = require('./models/resposta');
 
 //carrega rotas
 const indexRoute     = require('./routes/index-route');
@@ -23,6 +24,7 @@ const userRoute      = require('./routes/user-route');
 const perguntaRoute  = require('./routes/pergunta-route');
 const gabaritoRoute  = require('./routes/gabarito-route');
 const calcularRoute  = require('./routes/calcular-route');
+const respostaRoute  = require('./routes/resposta-route');
 const loginRoute     = require('./routes/login-route');
 
 app.use(bodyParser.json({
@@ -58,6 +60,7 @@ app.use('/api/gabarito', gabaritoRoute);
 app.use('/api/questionario/perguntas', perguntaRoute);
 app.use('/api/questionario/calcular', calcularRoute);
 app.use('/api/autenticacao', loginRoute);
+app.use('/api/resultado',respostaRoute);
 
 
 module.exports = app; 
