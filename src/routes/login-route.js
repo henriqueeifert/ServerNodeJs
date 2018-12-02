@@ -9,6 +9,7 @@ const authService = require('../services/auth-service');
 router.post('/login', controller.authenticate);
 router.post('/cadastrar',controllerUser.post);
 router.get('/usuario',controller.decodeToken);
+router.put('/usuario',controllerUser.put);
 router.get('/logout',controller.get);
 
 module.exports = router;

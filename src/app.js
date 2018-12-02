@@ -57,10 +57,14 @@ app.use('/', indexRoute);
 app.use('/api/usuario', userRoute);
 app.use('/api/pergunta', perguntaRoute);
 app.use('/api/gabarito', gabaritoRoute);
+
+app.use('/api/autenticacao', loginRoute);
+
+app.use('/api/questionario/resultados',resultadoRoute);
 app.use('/api/questionario/perguntas', perguntaRoute);
 app.use('/api/questionario/calcular', calcularRoute);
-app.use('/api/autenticacao', loginRoute);
-app.use('/api/questionario/resultados',resultadoRoute);
+
+
 app.use('/api/resultado',resultadoRoute);
 
 
