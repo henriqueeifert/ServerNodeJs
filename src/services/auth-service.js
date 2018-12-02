@@ -35,8 +35,7 @@ exports.authorize =  function (req, res, next) {
                     message: 'Token Inválido'
                 });
             } else {          
-                console.log('token: '+token);      
-                console.log('tokenInvalido: '+JSON.stringify(tokenInvalido));
+
                 /*
                 if (tokenInvalido.token){
                     res.status(403).json({
@@ -52,7 +51,9 @@ exports.authorize =  function (req, res, next) {
 };
 
 exports.isAdmin = function (req, res, next) {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'].substr(7); 
+    var tokenAuthorization = req.headers['authorization'];
+    console.log('tokenAuthorization: '+tokenAuthorization);
+    const token = req.body.token || req.query.token || req.headers['x-access-token'] || tokenAuthorization.substr(7); 
     const data  = jwt.verify(token, global.SALT_KEY); 
 
     if (!token) {
