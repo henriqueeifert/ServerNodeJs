@@ -69,6 +69,13 @@ exports.post = async(req, res, next) => {
             data_nascimento: new Date(req.body.data_nascimento),
             id: new mongoose.Types.ObjectId
         });
+
+        const tokenData = await authService.generateToken({
+            email:            savedUser.email,
+            id:               savedUser.id,
+            administrador:    savedUser.administrador,
+            nome:             savedUser.nome            
+        });  
         
         let dateStr = moment(savedUser.data_nascimento).format('YYYY-MM-DD');
         res.status(200).send({
@@ -80,7 +87,8 @@ exports.post = async(req, res, next) => {
                 nome: savedUser.nome,
                 email: savedUser.email,
                 administrador: savedUser.administrador,
-                data_nascimento:  dateStr
+                data_nascimento:  dateStr,
+                token: tokenData
             }            
         });
     } catch (e) {
