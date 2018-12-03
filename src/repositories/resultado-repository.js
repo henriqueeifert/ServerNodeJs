@@ -9,8 +9,8 @@ exports.create = async(data) => {
 }
 //
 exports.get = async() => {
-    const resp    = await Resultado.find({}).populate('user', 'nome');
-    var   respStr = JSON.stringify(resp,['id','resultado','pontuacao', 'descricao', 'data', 'id_usuario', 'nome']);
+    const resp    = await Resultado.find({});
+    var   respStr = JSON.stringify(resp,['id','resultado','pontuacao', 'descricao', 'data', 'id_usuario']);
     return await JSON.parse(respStr);
 }
 exports.getById = async(id) => {

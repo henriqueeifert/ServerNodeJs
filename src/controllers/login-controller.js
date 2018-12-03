@@ -26,7 +26,10 @@ exports.authenticate = async(req, res, next) => {
         }
 
         const token = await authService.generateToken({
-            email:            user.email
+            email:            user.email,
+            id:               user.id,
+            administrador:    user.administrador,
+            nome:             user.nome     
         });        
         
         res.status(201).send({
@@ -62,7 +65,10 @@ exports.refreshToken = async(req, res, next) => {
         }
 
         const tokenData = await authService.generateToken({
-            email:            user.email
+            email:            user.email,
+            id:               user.id,
+            administrador:    user.administrador,
+            nome:             user.nome            
         });        
         
         res.status(201).send({

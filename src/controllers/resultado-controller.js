@@ -1,8 +1,9 @@
 'use strict';
 
-const mongoose = require('mongoose');
-const repository = require('../repositories/resultado-repository');
-const moment = require('moment');
+const mongoose       = require('mongoose');
+const repository     = require('../repositories/resultado-repository');
+const repositoryUser = require('../repositories/user-repository');
+const moment         = require('moment');
 
 exports.post = async(req, res, next) => {
     try {  
@@ -75,7 +76,30 @@ exports.post = async(req, res, next) => {
 
 exports.get = async(req, res, next) => {
     try {
-        var resultado   = await repository.get();
+        var resultado   = await repository.get();   
+        /*     
+        var resu;
+        for (var i = 0; i < resultado.length; i++) {
+            const usuario = await repositoryUser.getById(resultado[i].id_usuario);
+            var resultCompleto = {
+                id:         resultado[i].id,
+                resultado:  resultado[i].resultado,
+                pontuacao:  resultado[i].pontuacao,
+                descricao:  resultado[i].descricao,
+                data:       resultado[i].data,  
+                id_usuario: resultado[i].id_usuario,
+                nome:       usuario.nome  
+            };
+            if (!resu){
+                resu = JSON.stringify(resultCompleto);//resultCompleto;
+            }else{
+                resu += ','+JSON.stringify(resultCompleto);//resultCompleto;
+            }
+        }
+        console.log('JSON: '+resu);        
+        resu = JSON.parse(resu);
+        console.log('JSON2: '+resu);        
+        */
         res.status(200).send(
             {
                 resultados: resultado
@@ -89,7 +113,8 @@ exports.get = async(req, res, next) => {
 }
 
 
-exports.getById = async(req, res, next) => {    
+exports.getById = async(req, res, next) => {  
+    console.log('TESTE: '+req.params.id);
     var data = await repository.getById(req.params.id);
         
     try {

@@ -52,7 +52,6 @@ exports.authorize =  function (req, res, next) {
 
 exports.isAdmin = function (req, res, next) {
     var tokenAuthorization = req.headers['authorization'];
-    console.log('tokenAuthorization: '+tokenAuthorization);
     const token = req.body.token || req.query.token || req.headers['x-access-token'] || tokenAuthorization; 
     const data  = jwt.verify(token, global.SALT_KEY); 
 
